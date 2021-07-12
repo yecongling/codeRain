@@ -12,7 +12,7 @@ body.signin {
 }
 
 img.user-image{
-    border-radius: 8px;
+    border-radius: 6px;
 }
 .signinpanel {
     width:750px;
@@ -55,7 +55,7 @@ img.user-image{
     box-shadow:0 3px 0 rgba(12,12,12,.03);
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
-    border-radius:8px;
+    border-radius:6px;
     padding:30px
 }
 .signup-footer {
