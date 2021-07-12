@@ -3,7 +3,7 @@ html {
 }
 body.signin {
     height:auto;
-    background:url(/images/login-background.jpg) no-repeat center fixed;
+    background:url(/images/login_back.jpg) no-repeat center fixed;
     -webkit-background-size:cover;
     -moz-background-size:cover;
     -o-background-size:cover;
@@ -95,7 +95,8 @@ img.user-image{
     position: relative;
     padding: 0 15px 0 25px;
     margin-bottom: 7px;
-    display: inline-block;
+    /*display: inline-block;*/
+    display: none;
 }
 /*
 将初始的checkbox的样式改变
