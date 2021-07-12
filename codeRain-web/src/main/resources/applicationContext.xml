@@ -14,8 +14,8 @@
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 开启注解扫描，管理service和dao -->
-<!--    <context:component-scan base-package="com.ycl.soft.service">-->
-<!--    </context:component-scan>-->
+        <context:component-scan base-package="cn.ycl.system.service">
+    </context:component-scan>
 <!--    <context:component-scan base-package="com.ycl.soft.dao">-->
 <!--    </context:component-scan>-->
 
