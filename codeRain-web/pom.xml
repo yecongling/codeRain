@@ -277,6 +277,12 @@
       <version>1.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>cn.wonderland</groupId>
+      <artifactId>codeRain-framework</artifactId>
+      <version>1.0</version>
+    </dependency>
+
 
   </dependencies>
 

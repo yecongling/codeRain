@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- shiro工厂bean配置 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- shiro的核心安全接口 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 要求登录时的连接 -->
+        <property name="loginUrl" value="/login.do"/>
+        <!-- shiro连接约束配置 -->
+        <property name="filterChainDefinitions">
+            <value>
+                <!-- 对静态资源设置允许匿名访问 -->
+                /images/** = anon
+                /js/** = anon
+                /css/** = anon
+                <!-- 可匿名访问路径，例如：验证码、登录连接、退出连接等 -->
+                /auth/login = anon
+                <!-- 剩余其他路径，必须认证通过才可以访问 -->
+                /login.do = authc
+            </value>
+        </property>
+    </bean>
+
+    <!-- 配置shiro安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realms" ref="customRealm"/>
+    </bean>
+
+    <!-- 自定义Realm -->
+    <bean id="customRealm" class="cn.ycl.framework.shiro.realm.UserRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+    <!-- 配置凭证算法匹配器 -->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher"><!-- Md5算法 -->
+        <property name="hashAlgorithmName" value="Md5"/>
+    </bean>
+</beans>

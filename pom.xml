@@ -340,6 +340,7 @@
         <module>codeRain-web</module>
         <module>codeRain-system</module>
         <module>codeRain-common</module>
+        <module>codeRain-framework</module>
     </modules>
 
 
