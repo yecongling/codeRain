@@ -30,7 +30,7 @@ public class UserRealm extends AuthorizingRealm {
         char[] password = upToken.getPassword();
         System.out.println(username);
         System.out.println(new String(password));
-        SysUser user = new SysUser("admin", "admin123");
+        SysUser user = null;
         String salt = ShiroUtils.randomSalt();
         ByteSource bytes = ByteSource.Util.bytes(salt);
 

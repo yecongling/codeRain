@@ -4,9 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ycl.system.mapper.SysUserMapper">
 
-	<!--<resultMap type="SysUser" id="SysUserResult">
+	<resultMap type="cn.ycl.common.core.domain.entity.SysUser" id="SysUserResult">
 		<id     property="userId"        column="user_id"         />
-		<result property="deptId"        column="dept_id"         />
 		<result property="loginName"     column="login_name"      />
 		<result property="userName"      column="user_name"       />
 		<result property="userType"      column="user_type"       />
@@ -26,28 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updateBy"      column="update_by"       />
 		<result property="updateTime"    column="update_time"     />
 		<result property="remark"        column="remark"          />
-		<association property="dept"     column="dept_id" javaType="SysDept" resultMap="deptResult" />
-		<collection  property="roles"   javaType="java.util.List"        resultMap="RoleResult" />
 	</resultMap>
-	
-	<resultMap id="deptResult" type="SysDept">
-		<id     property="deptId"   column="dept_id"     />
-		<result property="parentId" column="parent_id"   />
-		<result property="deptName" column="dept_name"   />
-		<result property="orderNum" column="order_num"   />
-		<result property="leader"   column="leader"      />
-		<result property="status"   column="dept_status" />
-	</resultMap>
-	
-	<resultMap id="RoleResult" type="SysRole">
-		<id     property="roleId"       column="role_id"        />
-		<result property="roleName"     column="role_name"      />
-		<result property="roleKey"      column="role_key"       />
-		<result property="roleSort"     column="role_sort"      />
-		<result property="dataScope"    column="data_scope"     />
-		<result property="status"       column="role_status"    />
-	</resultMap>
-	
 	<sql id="selectUserVo">
         select  u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.sex, u.password, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.pwd_update_date, u.create_time, u.remark,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.leader, d.status as dept_status,
@@ -58,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 left join sys_role r on r.role_id = ur.role_id
     </sql>
 	
-	<select id="selectUserList" parameterType="SysUser" resultMap="SysUserResult">
+	<select id="selectUserList" parameterType="cn.ycl.common.core.domain.entity.SysUser" resultMap="SysUserResult">
 		select u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
 		left join sys_dept d on u.dept_id = d.dept_id
 		where u.del_flag = '0'
@@ -71,20 +49,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="phonenumber != null and phonenumber != ''">
 			AND u.phonenumber like concat('%', #{phonenumber}, '%')
 		</if>
-		<if test="params.beginTime != null and params.beginTime != ''">&lt;!&ndash; 开始时间检索 &ndash;&gt;
+		<if test="params.beginTime != null and params.beginTime != ''">
 			AND date_format(u.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
 		</if>
-		<if test="params.endTime != null and params.endTime != ''">&lt;!&ndash; 结束时间检索 &ndash;&gt;
+		<if test="params.endTime != null and params.endTime != ''">
 			AND date_format(u.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 		</if>
 		<if test="deptId != null and deptId != 0">
 			AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE FIND_IN_SET (#{deptId},ancestors) ))
 		</if>
-		&lt;!&ndash; 数据范围过滤 &ndash;&gt;
-		${params.dataScope}
 	</select>
 	
-	<select id="selectAllocatedList" parameterType="SysUser" resultMap="SysUserResult">
+	<select id="selectAllocatedList" parameterType="cn.ycl.common.core.domain.entity.SysUser" resultMap="SysUserResult">
 	    select distinct u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.status, u.create_time
 	    from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -97,11 +73,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="phonenumber != null and phonenumber != ''">
 			AND u.phonenumber like concat('%', #{phonenumber}, '%')
 		</if>
-		&lt;!&ndash; 数据范围过滤 &ndash;&gt;
-		${params.dataScope}
 	</select>
 	
-	<select id="selectUnallocatedList" parameterType="SysUser" resultMap="SysUserResult">
+	<select id="selectUnallocatedList" parameterType="cn.ycl.common.core.domain.entity.SysUser" resultMap="SysUserResult">
 	    select distinct u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.status, u.create_time
 	    from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -115,8 +89,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="phonenumber != null and phonenumber != ''">
 			AND u.phonenumber like concat('%', #{phonenumber}, '%')
 		</if>
-		&lt;!&ndash; 数据范围过滤 &ndash;&gt;
-		${params.dataScope}
 	</select>
 	
 	<select id="selectUserByLoginName" parameterType="String" resultMap="SysUserResult">
@@ -162,7 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach> 
  	</delete>
  	
- 	<update id="updateUser" parameterType="SysUser">
+ 	<update id="updateUser" parameterType="cn.ycl.common.core.domain.entity.SysUser">
  		update sys_user
  		<set>
  			<if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
@@ -186,7 +158,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		where user_id = #{userId}
 	</update>
  	
- 	<insert id="insertUser" parameterType="SysUser" useGeneratedKeys="true" keyProperty="userId">
+ 	<insert id="insertUser" parameterType="cn.ycl.common.core.domain.entity.SysUser" useGeneratedKeys="true" keyProperty="userId">
  		insert into sys_user(
  			<if test="userId != null and userId != 0">user_id,</if>
  			<if test="deptId != null and deptId != 0">dept_id,</if>
@@ -222,6 +194,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="remark != null and remark != ''">#{remark},</if>
  			sysdate()
  		)
-	</insert>-->
+	</insert>
 	
 </mapper> 

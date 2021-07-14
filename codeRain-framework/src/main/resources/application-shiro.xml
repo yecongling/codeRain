@@ -30,12 +30,6 @@
     </bean>
 
     <!-- 自定义Realm -->
-    <bean id="customRealm" class="cn.ycl.framework.shiro.realm.UserRealm">
-        <property name="credentialsMatcher" ref="credentialsMatcher"/>
-    </bean>
+    <bean id="customRealm" class="cn.ycl.framework.shiro.realm.UserRealm"/>
 
-    <!-- 配置凭证算法匹配器 -->
-    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher"><!-- Md5算法 -->
-        <property name="hashAlgorithmName" value="Md5"/>
-    </bean>
 </beans>
