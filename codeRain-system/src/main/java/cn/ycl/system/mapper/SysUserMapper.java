@@ -4,6 +4,7 @@ import cn.ycl.common.core.domain.entity.SysUser;
 
 import java.util.List;
 
+
 public interface SysUserMapper {
     /**
      * 根据条件分页查询用户列表

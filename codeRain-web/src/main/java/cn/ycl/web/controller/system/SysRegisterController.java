@@ -3,7 +3,10 @@ package cn.ycl.web.controller.system;
 import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.core.domain.AjaxResult;
 import cn.ycl.common.core.domain.entity.SysUser;
+import cn.ycl.framework.shiro.service.SysRegisterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SysRegisterController extends BaseController {
 
+    @Autowired
+    private SysRegisterService registerService;
+
     @GetMapping("/register.do")
     public String register() {
         return "register/register";
@@ -22,7 +28,8 @@ public class SysRegisterController extends BaseController {
     @PostMapping("/register.do")
     @ResponseBody
     public AjaxResult ajaxRegister(SysUser user){
-        return success();
+        String msg = registerService.register(user);
+        return StringUtils.isEmpty(msg) ? success() : error(msg);
     }
 
 }

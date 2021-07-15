@@ -69,7 +69,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis.xml"/>
-        <property name="mapperLocations" value="classpath:mapper/system/**/*.xml"/>
+        <property name="mapperLocations" value="classpath*:mapper/**/*.xml"/>
         <!-- 传入PageHelper的插件 -->
         <property name="plugins">
             <array>
@@ -88,7 +88,9 @@
     <!-- 扫描dao接口 -->
     <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="com.ycl.soft.dao"/>
+        <!-- 配置扫描多个dao的包 -->
+        <!--<property name="basePackage" value="cn.ycl.system.mapper,cn.yc.framework.mapper"/>-->
+        <property name="basePackage" value="cn.ycl.system.mapper"/>
     </bean>
     <!-- 配置Spring的声明式事务管理 -->
     <!-- 配置事务管理器 -->
