@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 @Component
 public class SysRegisterService {
 
+
     @Autowired
     private ISysUserService userService;
 
