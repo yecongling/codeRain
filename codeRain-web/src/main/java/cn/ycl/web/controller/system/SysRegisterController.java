@@ -17,8 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SysRegisterController extends BaseController {
 
-    @Autowired
+
     private SysRegisterService registerService;
+
+    @Autowired
+    public void setRegisterService(SysRegisterService registerService){
+        this.registerService = registerService;
+    }
 
     @GetMapping("/register.do")
     public String register() {

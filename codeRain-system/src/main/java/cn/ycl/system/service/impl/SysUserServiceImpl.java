@@ -16,8 +16,13 @@ public class SysUserServiceImpl implements ISysUserService {
 
     private static final Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
 
-    @Autowired
+
     private SysUserMapper userMapper;
+
+    @Autowired
+    public void setUserMapper(SysUserMapper userMapper){
+        this.userMapper = userMapper;
+    }
 
     @Override
     public List<SysUser> selectUserList(SysUser user) {

@@ -16,11 +16,21 @@ import org.springframework.util.StringUtils;
 public class SysRegisterService {
 
 
-    @Autowired
+
     private ISysUserService userService;
 
     @Autowired
+    public void setUserService(ISysUserService userService){
+        this.userService = userService;
+    }
+
+
     private SysPasswordService passwordService;
+
+    @Autowired
+    public void setUserService(SysPasswordService passwordService){
+        this.passwordService = passwordService;
+    }
 
     /**
      * 注册
