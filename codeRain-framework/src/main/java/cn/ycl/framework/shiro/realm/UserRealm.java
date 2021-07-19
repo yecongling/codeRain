@@ -1,13 +1,15 @@
 package cn.ycl.framework.shiro.realm;
 
 import cn.ycl.common.core.domain.entity.SysUser;
-import cn.ycl.common.utils.ShiroUtils;
-import cn.ycl.framework.shiro.service.SysPasswordService;
+import cn.ycl.common.exception.user.*;
+import cn.ycl.framework.shiro.service.SysLoginService;
+import net.sf.ehcache.CacheException;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -15,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class UserRealm extends AuthorizingRealm {
 
+    private static final Logger log = LoggerFactory.getLogger(UserRealm.class);
+
     @Autowired
-    private SysPasswordService passwordService;
+    private SysLoginService sysLoginService;
 
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         return null;
@@ -27,16 +31,31 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken upToken = (UsernamePasswordToken) token;
 
         String username = upToken.getUsername();
-        char[] password = upToken.getPassword();
-        System.out.println(username);
-        System.out.println(new String(password));
-        SysUser user = null;
-        String salt = ShiroUtils.randomSalt();
-        ByteSource bytes = ByteSource.Util.bytes(salt);
+        String password = "";
+        if (upToken.getPassword() != null) {
+            password = new String(upToken.getPassword());
+        }
+        SysUser user;
 
-        String password1 = passwordService.encryptPassword(username, new String(password), salt);
+        try {
+            user = sysLoginService.login(username, password);
+        } catch (CacheException e) {
+            throw new AuthenticationException(e.getMessage(), e);
+        } catch (UserNotExistsException e) {
+            throw new UnknownAccountException(e.getMessage(), e);
+        } catch (UserPasswordNotMatchException e) {
+            throw new IncorrectCredentialsException(e.getMessage(), e);
+        } catch (UserPasswordRetryLimitExceedException e) {
+            throw new ExcessiveAttemptsException(e.getMessage(), e);
+        } catch (UserBlockedException e) {
+            throw new LockedAccountException(e.getMessage(), e);
+        } catch (RoleBlockedException e) {
+            throw new LockedAccountException(e.getMessage(), e);
+        } catch (Exception e){
+            log.info("对用户[" + username + "]进行登录验证..验证未通过{}", e.getMessage());
+            throw new AuthenticationException(e.getMessage(), e);
+        }
 
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password1, bytes, getName());
-        return info;
+        return new SimpleAuthenticationInfo(user, password, getName());
     }
 }
