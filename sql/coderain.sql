@@ -19,10 +19,8 @@ create table if not exists sys_menu
 )
     comment '菜单权限表';
 
-create table if not exists sys_user
-(
-    user_id         bigint auto_increment comment '用户ID'
-        primary key,
+create table if not exists sys_user(
+    user_id         bigint auto_increment comment '用户ID' primary key,
     dept_id         bigint                    null comment '部门ID',
     login_name      varchar(30)               not null comment '登录账号',
     user_name       varchar(30)  default ''   null comment '用户昵称',

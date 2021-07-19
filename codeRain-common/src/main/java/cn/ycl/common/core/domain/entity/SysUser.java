@@ -22,6 +22,19 @@ public class SysUser extends BaseEntity {
     private Long userId;
 
     /**
+     * 部门id
+     */
+    private Long deptId;
+
+    /**
+     * 部门父ID
+     */
+    private Long parentId;
+
+    /** 角色ID */
+    private Long roleId;
+
+    /**
      * 登录名称
      */
     private String loginName;

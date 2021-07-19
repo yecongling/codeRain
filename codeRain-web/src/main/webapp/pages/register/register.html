@@ -2,9 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>注册</title>
-</head>
-<body>
+    <meta name="description" content="后台管理系统">
+    <link href="/plugins/bootstrap/css/bootstrap.min.css"  rel="stylesheet"/>
+    <link href="/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="/css/login.css"rel="stylesheet"/>
+    <link href="/css/codeRain-ui.css" rel="stylesheet"/>
 
+    <!-- 360浏览器急速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href=""/>
+    <style type="text/css">label.error { position:inherit;  }</style>
+</head>
+<body class="signin">
+<div class="signinpanel">
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="signin-info">
+                <div class="logopanel m-b">
+                    <h1><img alt="[ CodeRain ]" src="/images/profile.jpg"></h1>
+                </div>
+                <div class="m-b"></div>
+                <h4>欢迎使用 <strong>后台管理系统</strong></h4>
+                <ul class="m-b">
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Spring</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Mybatis</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> SpringMVC</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Thymeleaf</li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Bootstrap</li>
+                </ul>
+                <strong>已经注册过? <a href="/login.do" style="color: #10ff00">直接登录&raquo;</a></strong>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <form id="registerForm" autocomplete="off">
+                <h4 class="no-margins">注册：</h4>
+                <p class="m-t-md">你管我是个什么鬼</p>
+                <input type="text"     name="username" class="form-control uname"         placeholder="用户名"   maxlength="20" />
+                <input type="password" name="password" class="form-control pword"         placeholder="密码"     maxlength="20" />
+                <input type="password" name="confirmPassword" class="form-control pword"  placeholder="确认密码" maxlength="20" />
+                <!--<div class="row m-t">
+                    <div class="col-xs-6">
+                        <input type="text" name="validateCode" class="form-control code"  placeholder="验证码"   maxlength="5" >
+                    </div>
+                    <div class="col-xs-6">
+                        <a href="javascript:void(0);" title="点击更换验证码">
+                            <img class="imgcode" width="85%"/>
+                        </a>
+                    </div>
+                </div>-->
+                <div class="checkbox-custom">
+                    <input type="checkbox" id="acceptTerm" name="acceptTerm"> <label for="acceptTerm">我已阅读并同意</label>
+                    <a href="https://gitee.com/y_project/RuoYi/blob/master/README.md" target="_blank">使用条款</a>
+                </div>
+                <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证注册，请稍后...">注册</button>
+            </form>
+        </div>
+    </div>
+    <div class="signup-footer">
+        <div class="pull-left">
+            &copy; 2021 All Rights Reserved. CodeRain <br>
+        </div>
+    </div>
+</div>
+
+<script  type="text/javascript"> var ctx = '/'; </script>
+<!-- 全局js -->
+<script src="/plugins/jQuery-3.6.0.js"  type="text/javascript"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"  type="text/javascript"></script>
+<!-- 验证插件 -->
+<script src="/plugins/validate/jquery.validate.min.js"  type="text/javascript"></script>
+<script src="/plugins/validate/messages_zh.min.js"  type="text/javascript"></script>
+<script src="/plugins/layer/layer.min.js"  type="text/javascript"></script>
+<script src="/plugins/blockUI/jquery.blockUI.js" type="text/javascript"></script>
+<script src="/js/codeRain.js"  type="text/javascript"></script>
+<script src="/js/register.js"  type="text/javascript"></script>
 </body>
 </html>

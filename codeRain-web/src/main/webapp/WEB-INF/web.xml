@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1" metadata-complete="true">
   <welcome-file-list>
-    <welcome-file>/pages/login/login.html</welcome-file>
+    <welcome-file>/pages/register/register.html</welcome-file>
   </welcome-file-list>
   <!-- 配置加载类路径的配置文件 -->
   <context-param>
