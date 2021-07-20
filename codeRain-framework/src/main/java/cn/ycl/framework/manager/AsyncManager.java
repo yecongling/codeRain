@@ -1,8 +1,11 @@
 package cn.ycl.framework.manager;
 
+import cn.ycl.common.utils.Threads;
 import cn.ycl.common.utils.spring.SpringUtils;
 
+import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 异步任务管理器
@@ -29,5 +32,20 @@ public class AsyncManager {
 
     public static AsyncManager me() {
         return me;
+    }
+
+    /**
+     * 知行任务
+     * @param task 任务
+     */
+    public void execute(TimerTask task){
+        executor.schedule(task, OPERATE_DELAY_TIME, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * 停止任务线程池
+     */
+    public void shutdown(){
+        Threads.shutdownAndAwaitTerminal(executor);
     }
 }
