@@ -1,5 +1,9 @@
 package cn.ycl.framework.manager;
 
+import cn.ycl.common.utils.spring.SpringUtils;
+
+import java.util.concurrent.ScheduledExecutorService;
+
 /**
  * 异步任务管理器
  */
@@ -13,7 +17,7 @@ public class AsyncManager {
     /**
      * 异步操作任务调度线程池
      */
-    // private ScheduledExecutorService executor = SpringUtils.getBean("scheduledExecutorService");
+     private ScheduledExecutorService executor = SpringUtils.getBean("scheduledExecutorService");
 
     /**
      * 单例模式

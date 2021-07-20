@@ -1,6 +1,6 @@
 package cn.ycl.common.utils;
 
-import cn.ycl.common.utils.spring.SprintUtils;
+import cn.ycl.common.utils.spring.SpringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
@@ -10,7 +10,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 public class MessageUtils {
 
     public static String message(String code, Object... args){
-        MessageSource messageSource = SprintUtils.getBean(MessageSource.class);
+        MessageSource messageSource = SpringUtils.getBean(MessageSource.class);
         return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
     }
 }

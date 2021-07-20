@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContextAware;
 /**
  * Spring工具类
  */
-public class SprintUtils implements BeanFactoryPostProcessor, ApplicationContextAware {
+public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContextAware {
 
     private static ConfigurableListableBeanFactory beanFactory;
 
@@ -20,12 +20,12 @@ public class SprintUtils implements BeanFactoryPostProcessor, ApplicationContext
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        SprintUtils.beanFactory = beanFactory;
+        SpringUtils.beanFactory = beanFactory;
     }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SprintUtils.applicationContext = applicationContext;
+        SpringUtils.applicationContext = applicationContext;
     }
 
     /**
