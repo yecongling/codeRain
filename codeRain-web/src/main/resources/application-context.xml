@@ -102,14 +102,14 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <!--<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache/ehcache-shiro.xml"/>
     </bean>
-    <!-- Spring整合Ehache -->
+    &lt;!&ndash; Spring整合Ehache &ndash;&gt;
     <bean id="springCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
         <property name="cacheManager" ref="ehCacheManager"/>
     </bean>
-    <cache:annotation-driven cache-manager="springCacheManager"/>
+    <cache:annotation-driven cache-manager="springCacheManager"/>-->
     <!-- 自定义配置bean类 -->
     <bean id="shiroConfig" class="cn.ycl.framework.config.ShiroConfig"/>
     <tx:annotation-driven transaction-manager="transactionManager"/>
