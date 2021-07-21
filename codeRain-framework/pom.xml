@@ -48,6 +48,12 @@
             <artifactId>shiro-core</artifactId>
         </dependency>
 
+        <!-- servlet包 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
