@@ -1,7 +1,9 @@
 package cn.ycl.system.service.impl;
 
-import cn.ycl.system.domain.SysLogininfor;
-import cn.ycl.system.service.ISysLogininforService;
+import cn.ycl.system.domain.SysLogininfo;
+import cn.ycl.system.mapper.SysLogininfoMapper;
+import cn.ycl.system.service.ISysLogininfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +14,15 @@ import java.util.List;
  * @author ruoyi
  */
 @Service
-public class SysLogininforServiceImpl implements ISysLogininforService {
+public class SysLogininfoServiceImpl implements ISysLogininfoService {
+
+
+    private SysLogininfoMapper logininfoMapper;
+
+    @Autowired
+    public void setLogininfoMapper(SysLogininfoMapper logininfoMapper) {
+        this.logininfoMapper = logininfoMapper;
+    }
 
     /**
      * 新增系统登录日志
@@ -20,8 +30,8 @@ public class SysLogininforServiceImpl implements ISysLogininforService {
      * @param logininfor 访问日志对象
      */
     @Override
-    public void insertLogininfor(SysLogininfor logininfor) {
-
+    public void insertLogininfo(SysLogininfo logininfor) {
+        logininfoMapper.insertLogininfor(logininfor);
     }
 
     /**
@@ -31,7 +41,7 @@ public class SysLogininforServiceImpl implements ISysLogininforService {
      * @return 登录记录集合
      */
     @Override
-    public List<SysLogininfor> selectLogininforList(SysLogininfor logininfor) {
+    public List<SysLogininfo> selectLogininforList(SysLogininfo logininfor) {
         return null;
     }
 
