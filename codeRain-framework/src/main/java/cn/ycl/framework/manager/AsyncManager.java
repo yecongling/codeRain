@@ -35,7 +35,7 @@ public class AsyncManager {
     }
 
     /**
-     * 知行任务
+     * 执行任务
      * @param task 任务
      */
     public void execute(TimerTask task){
