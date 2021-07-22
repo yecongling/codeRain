@@ -19,8 +19,21 @@
     </context:component-scan>
 
 
-    <context:component-scan base-package="cn.ycl.common.config">
+    <context:component-scan base-package="cn.ycl.common">
     </context:component-scan>
+
+
+    <!-- 配置解析国际化资源文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="basenames">
+            <list>
+                <value>messages</value>
+                <value>classpath:shiroConfig</value>
+            </list>
+        </property>
+    </bean>
+
 
     <!-- 配置视图解析器 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

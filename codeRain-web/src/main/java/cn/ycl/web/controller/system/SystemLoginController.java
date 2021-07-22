@@ -42,7 +42,6 @@ public class SystemLoginController extends BaseController {
             subject.login(token);
             return success();
         } catch (AuthenticationException e){
-            e.printStackTrace();
             String msg = "用户或密码错误";
             if (StringUtils.isNotEmpty(e.getMessage())){
                 msg = e.getMessage();
