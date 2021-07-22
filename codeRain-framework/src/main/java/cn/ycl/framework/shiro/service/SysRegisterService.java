@@ -1,9 +1,13 @@
 package cn.ycl.framework.shiro.service;
 
+import cn.ycl.common.constant.Constants;
 import cn.ycl.common.constant.UserConstants;
 import cn.ycl.common.core.domain.entity.SysUser;
 import cn.ycl.common.utils.DateUtils;
+import cn.ycl.common.utils.MessageUtils;
 import cn.ycl.common.utils.ShiroUtils;
+import cn.ycl.framework.manager.AsyncManager;
+import cn.ycl.framework.manager.factory.AsyncFactory;
 import cn.ycl.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -61,6 +65,7 @@ public class SysRegisterService {
                 msg = "注册失败，请联系管理员处理";
             } else {
                 // 记录登录信息
+                AsyncManager.me().execute(AsyncFactory.recordLogininfo(loginName, Constants.REGISTER, MessageUtils.message("user.register.success")));
             }
         }
         return msg;

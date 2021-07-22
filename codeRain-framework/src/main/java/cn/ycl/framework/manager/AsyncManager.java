@@ -46,6 +46,6 @@ public class AsyncManager {
      * 停止任务线程池
      */
     public void shutdown(){
-        Threads.shutdownAndAwaitTerminal(executor);
+        Threads.shutdownAndAwaitTermination(executor);
     }
 }

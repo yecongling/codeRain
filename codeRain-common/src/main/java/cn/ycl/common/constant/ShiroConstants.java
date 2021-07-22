@@ -3,7 +3,7 @@ package cn.ycl.common.constant;
 /**
  * Shiro通用常量
  *
- * @author ruoyi
+ * @author wonnderland
  */
 public class ShiroConstants {
     /**

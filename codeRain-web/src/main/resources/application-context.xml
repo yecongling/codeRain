@@ -20,10 +20,10 @@
     <!-- 开启注解扫描，管理service和dao -->
     <context:component-scan base-package="cn.ycl.system.service">
     </context:component-scan>
-    <context:component-scan base-package="cn.ycl.framework.shiro.service">
-    </context:component-scan>
 
-    <context:property-placeholder location="classpath:db.properties,classpath:messages.properties, classpath:shiroConfig.properties"/>
+    <context:property-placeholder location="classpath*:db.properties,classpath*:messages.properties, classpath*:shiroConfig.properties"/>
+
+
     <!-- 配置连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driver}"/>
@@ -110,8 +110,16 @@
         <property name="cacheManager" ref="ehCacheManager"/>
     </bean>
     <cache:annotation-driven cache-manager="springCacheManager"/>-->
+
+
+    <context:component-scan base-package="cn.ycl.framework">
+    </context:component-scan>
+
+    <context:component-scan base-package="cn.ycl.common">
+    </context:component-scan>
+
     <!-- 自定义配置bean类 -->
-    <bean id="shiroConfig" class="cn.ycl.framework.config.ShiroConfig"/>
+    <!--<bean id="shiroConfig" class="cn.ycl.framework.config.ShiroConfig"/>-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>

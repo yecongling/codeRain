@@ -31,7 +31,7 @@ public class Threads {
      * 如果仍人超時，則強制退出.
      * 另对在shutdown时线程本身被调用中断做了处理.
      */
-    public static void shutdownAndAwaitTerminal(ExecutorService pool) {
+    public static void shutdownAndAwaitTermination(ExecutorService pool) {
         if (pool != null && !pool.isShutdown()) {
             pool.shutdown();
             try {

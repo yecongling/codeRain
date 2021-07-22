@@ -2,12 +2,19 @@ package cn.ycl.framework.config;
 
 import cn.ycl.common.constant.Constants;
 import cn.ycl.common.utils.StringUtils;
+import cn.ycl.common.utils.spring.SpringUtils;
 import cn.ycl.framework.shiro.realm.UserRealm;
+import cn.ycl.framework.shiro.session.OnlineSessionDAO;
+import cn.ycl.framework.shiro.session.OnlineSessionFactory;
+import cn.ycl.framework.shiro.web.session.OnlineWebSessionManager;
+import cn.ycl.framework.shiro.web.session.SpringSessionValidationScheduler;
 import net.sf.ehcache.CacheManager;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.io.ResourceUtils;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -102,13 +109,14 @@ public class ShiroConfig {
 
     /**
      * 缓存管理器 使用Ehcache实现
+     *
      * @return
      */
     @Bean
-    public EhCacheManager getEhCacheManager(){
+    public EhCacheManager getEhCacheManager() {
         CacheManager cacheManager = CacheManager.getCacheManager("coderain");
         EhCacheManager manager = new EhCacheManager();
-        if (StringUtils.isNull(cacheManager)){
+        if (StringUtils.isNull(cacheManager)) {
             manager.setCacheManager(new net.sf.ehcache.CacheManager(getCacheManagerConfigFileInputStream()));
         } else {
             manager.setCacheManager(cacheManager);
@@ -119,20 +127,18 @@ public class ShiroConfig {
     /**
      * 返回配置文件流 避免ehcache配置文件一直被占用，无法完全销毁项目重新部署
      */
-    protected InputStream getCacheManagerConfigFileInputStream(){
+    protected InputStream getCacheManagerConfigFileInputStream() {
         String configFile = "classpath:ehcache/ehcache-shiro.xml";
         InputStream inputStream = null;
-        try{
+        try {
             inputStream = ResourceUtils.getInputStreamForPath(configFile);
             byte[] b = IOUtils.toByteArray(inputStream);
             InputStream in = new ByteArrayInputStream(b);
             return in;
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             throw new ConfigurationException(
                     "Unable to obtain input stream for cacheManagerConfigFile [" + configFile + "]", e);
-        }
-        finally{
+        } finally {
             IOUtils.closeQuietly(inputStream);
         }
     }
@@ -141,10 +147,68 @@ public class ShiroConfig {
      * 自定义Realm
      */
     @Bean
-    public UserRealm userRealm(EhCacheManager cacheManager){
+    public UserRealm userRealm(EhCacheManager cacheManager) {
         UserRealm userRealm = new UserRealm();
         userRealm.setAuthorizationCacheName(Constants.SYS_AUTH_CACHE);
         userRealm.setCacheManager(cacheManager);
         return userRealm;
+    }
+
+    /**
+     * 自定义sessionDAO会话
+     */
+    @Bean
+    public OnlineSessionDAO sessionDAO() {
+        return new OnlineSessionDAO();
+    }
+
+    /**
+     * 自定义sessionFactory会话
+     */
+    @Bean
+    public OnlineSessionFactory sessionFactory() {
+        return new OnlineSessionFactory();
+    }
+
+    /**
+     * 会话管理器
+     */
+    @Bean
+    public OnlineWebSessionManager sessionManager() {
+        OnlineWebSessionManager manager = new OnlineWebSessionManager();
+        // 加入缓存管理器
+        manager.setCacheManager(getEhCacheManager());
+        // 删除过期的session
+        manager.setDeleteInvalidSessions(true);
+        // 设置全局session超时时间
+        manager.setGlobalSessionTimeout(expireTime * 60 * 1000);
+        // 去掉 JSESSIONID
+        manager.setSessionIdUrlRewritingEnabled(false);
+        // 定义要使用的无效的Session定时调度器
+        manager.setSessionValidationScheduler(SpringUtils.getBean(SpringSessionValidationScheduler.class));
+        // 是否定时检查session
+        manager.setSessionValidationSchedulerEnabled(true);
+        // 自定义SessionDao
+        manager.setSessionDAO(sessionDAO());
+        // 自定义sessionFactory
+        manager.setSessionFactory(sessionFactory());
+        return manager;
+    }
+
+    /**
+     * 安全管理器
+     */
+    @Bean
+    public SecurityManager securityManager(UserRealm userRealm) {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        // 设置realm.
+        securityManager.setRealm(userRealm);
+        // 记住我
+        //securityManager.setRememberMeManager(rememberMeManager());
+        // 注入缓存管理器;
+        securityManager.setCacheManager(getEhCacheManager());
+        // session管理器
+        securityManager.setSessionManager(sessionManager());
+        return securityManager;
     }
 }
