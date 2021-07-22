@@ -17,12 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<insert id="insertLogininfor" parameterType="cn.ycl.system.domain.SysLogininfo">
-		insert into sys_logininfor (login_name, status, ipaddr, login_location, browser, os, msg, login_time)
+		insert into sys_logininfo (login_name, status, ipaddr, login_location, browser, os, msg, login_time)
 		values (#{loginName}, #{status}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{msg}, sysdate())
 	</insert>
 	
 	<select id="selectLogininfoList" parameterType="cn.ycl.system.domain.SysLogininfo" resultMap="SysLogininforResult">
-		select info_id,login_name,ipaddr,login_location,browser,os,status,msg,login_time from sys_logininfor
+		select info_id,login_name,ipaddr,login_location,browser,os,status,msg,login_time from sys_logininfo
 		<where>
 			<if test="ipaddr != null and ipaddr != ''">
 				AND ipaddr like concat('%', #{ipaddr}, '%')
@@ -43,14 +43,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<delete id="deleteLogininfoByIds" parameterType="String">
- 		delete from sys_logininfor where info_id in
+ 		delete from sys_logininfo where info_id in
  		<foreach collection="array" item="infoId" open="(" separator="," close=")">
  			#{infoId}
         </foreach> 
  	</delete>
     
     <update id="cleanLogininfo">
-        truncate table sys_logininfor
+        truncate table sys_logininfo
     </update>
     
 </mapper> 
