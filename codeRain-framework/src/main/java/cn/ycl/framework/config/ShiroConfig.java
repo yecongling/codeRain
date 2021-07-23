@@ -13,8 +13,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.io.ResourceUtils;
-import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -196,24 +194,5 @@ public class ShiroConfig {
         manager.setSessionFactory(sessionFactory());
         System.out.println("会话管理器注册完成");
         return manager;
-    }
-
-    /**
-     * 安全管理器
-     */
-    @Bean
-    public SecurityManager securityManager(UserRealm userRealm) {
-        System.out.println("开始注册安全管理器");
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        // 设置realm.
-        securityManager.setRealm(userRealm);
-        // 记住我
-        //securityManager.setRememberMeManager(rememberMeManager());
-        // 注入缓存管理器;
-        securityManager.setCacheManager(getEhCacheManager());
-        // session管理器
-        securityManager.setSessionManager(sessionManager());
-        System.out.println("安全管理器注册完成");
-        return securityManager;
     }
 }

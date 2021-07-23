@@ -18,7 +18,6 @@
     <context:component-scan base-package="cn.ycl.web.controller">
     </context:component-scan>
 
-
     <!-- 配置解析国际化资源文件 -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="defaultEncoding" value="UTF-8" />
