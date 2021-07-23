@@ -17,8 +17,8 @@
     http://www.springframework.org/schema/cache
     http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-    <!-- 开启注解扫描，管理service和dao -->
-    <context:component-scan base-package="cn.ycl.system.service">
+    <!-- 开启注解扫描 -->
+    <context:component-scan base-package="cn.ycl">
     </context:component-scan>
 
     <context:property-placeholder location="classpath*:db.properties,classpath*:messages.properties, classpath*:shiroConfig.properties"/>
@@ -112,14 +112,17 @@
     <cache:annotation-driven cache-manager="springCacheManager"/>-->
 
 
-    <context:component-scan base-package="cn.ycl.framework">
-    </context:component-scan>
+    <!--<context:component-scan base-package="cn.ycl">
+    </context:component-scan>-->
 
-    <context:component-scan base-package="cn.ycl.common">
-    </context:component-scan>
+<!--    <context:component-scan base-package="cn.ycl.common">
+    </context:component-scan>-->
 
     <!-- 自定义配置bean类 -->
     <!--<bean id="shiroConfig" class="cn.ycl.framework.config.ShiroConfig"/>-->
+
+
+
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>

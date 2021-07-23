@@ -121,6 +121,7 @@ public class ShiroConfig {
         } else {
             manager.setCacheManager(cacheManager);
         }
+        System.out.println("缓存管理器注册完成");
         return manager;
     }
 
@@ -151,6 +152,7 @@ public class ShiroConfig {
         UserRealm userRealm = new UserRealm();
         userRealm.setAuthorizationCacheName(Constants.SYS_AUTH_CACHE);
         userRealm.setCacheManager(cacheManager);
+        System.out.println("自定义realm完成");
         return userRealm;
     }
 
@@ -181,7 +183,7 @@ public class ShiroConfig {
         // 删除过期的session
         manager.setDeleteInvalidSessions(true);
         // 设置全局session超时时间
-        manager.setGlobalSessionTimeout(expireTime * 60 * 1000);
+        manager.setGlobalSessionTimeout((long) expireTime * 60 * 1000);
         // 去掉 JSESSIONID
         manager.setSessionIdUrlRewritingEnabled(false);
         // 定义要使用的无效的Session定时调度器
@@ -192,6 +194,7 @@ public class ShiroConfig {
         manager.setSessionDAO(sessionDAO());
         // 自定义sessionFactory
         manager.setSessionFactory(sessionFactory());
+        System.out.println("会话管理器注册完成");
         return manager;
     }
 
@@ -200,6 +203,7 @@ public class ShiroConfig {
      */
     @Bean
     public SecurityManager securityManager(UserRealm userRealm) {
+        System.out.println("开始注册安全管理器");
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
         securityManager.setRealm(userRealm);
@@ -209,6 +213,7 @@ public class ShiroConfig {
         securityManager.setCacheManager(getEhCacheManager());
         // session管理器
         securityManager.setSessionManager(sessionManager());
+        System.out.println("安全管理器注册完成");
         return securityManager;
     }
 }

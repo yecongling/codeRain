@@ -11,20 +11,6 @@
     <param-value>classpath*:application-*.xml</param-value>
   </context-param>
 
-  <!-- spring 整合shiro安全框架 -->
-  <filter>
-    <filter-name>DelegatingFilterProxy</filter-name>
-    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    <init-param>
-      <param-name>targetBeanName</param-name>
-      <param-value>shiroFilter</param-value>
-    </init-param>
-  </filter>
-
-  <filter-mapping>
-    <filter-name>DelegatingFilterProxy</filter-name>
-    <url-pattern>/login.do,/register.do</url-pattern>
-  </filter-mapping>
 
   <!-- 配置监听器 -->
   <listener>
@@ -86,5 +72,20 @@
     <servlet-name>DruidStatView</servlet-name>
     <url-pattern>/druid/*</url-pattern>
   </servlet-mapping>
+
+  <!-- spring 整合shiro安全框架 -->
+  <filter>
+    <filter-name>DelegatingFilterProxy</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+      <param-name>targetBeanName</param-name>
+      <param-value>shiroFilter</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>DelegatingFilterProxy</filter-name>
+    <url-pattern>/login.do,/register.do</url-pattern>
+  </filter-mapping>
 
 </web-app>
