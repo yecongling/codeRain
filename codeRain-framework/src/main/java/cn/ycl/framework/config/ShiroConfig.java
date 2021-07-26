@@ -13,6 +13,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.io.ResourceUtils;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -132,8 +135,7 @@ public class ShiroConfig {
         try {
             inputStream = ResourceUtils.getInputStreamForPath(configFile);
             byte[] b = IOUtils.toByteArray(inputStream);
-            InputStream in = new ByteArrayInputStream(b);
-            return in;
+            return new ByteArrayInputStream(b);
         } catch (IOException e) {
             throw new ConfigurationException(
                     "Unable to obtain input stream for cacheManagerConfigFile [" + configFile + "]", e);
@@ -194,5 +196,28 @@ public class ShiroConfig {
         manager.setSessionFactory(sessionFactory());
         System.out.println("会话管理器注册完成");
         return manager;
+    }
+
+    @Bean
+    public SecurityManager securityManager(UserRealm userRealm){
+        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
+        // 设置realm
+        manager.setRealm(userRealm);
+        // 注入缓存管理器
+        manager.setCacheManager(getEhCacheManager());
+        // 注入session管理器
+        manager.setSessionManager(sessionManager());
+        System.out.println("注册安全管理器完成");
+        return manager;
+    }
+
+
+    @Bean(name = "shiroFilter")
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager){
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        // shiro的核心安全接口
+        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        System.out.println("注册shiro过滤器完成");
+        return shiroFilterFactoryBean;
     }
 }

@@ -39,16 +39,14 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
 
     /**
      * 会话验证管理器
+     * 这里不能使用构造器注入的原因是bean创建的先后顺序问题吗，使用构造器注入会在创建sessionManager bean之前调用，会找不到
      */
 
     @Qualifier("sessionManager")
     @Lazy
+    @Autowired
     private ValidatingSessionManager sessionManager;
 
-    @Autowired
-    public void setSessionManager(ValidatingSessionManager sessionManager) {
-        this.sessionManager = sessionManager;
-    }
 
     // 相隔多久检查一次session的有效性，单位毫秒，默认就是10分钟
     @Value("${shiro.session.validationInterval}")

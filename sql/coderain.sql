@@ -16,7 +16,7 @@ create table if not exists sys_menu
     update_by   varchar(64)  default ''  null comment '更新者',
     update_time datetime                 null comment '更新时间',
     remark      varchar(500) default ''  null comment '备注'
-)
+)engine=innodb default charset=utf8
     comment '菜单权限表';
 
 create table if not exists sys_user(
@@ -41,7 +41,7 @@ create table if not exists sys_user(
     update_by       varchar(64)  default ''   null comment '更新者',
     update_time     datetime                  null comment '更新时间',
     remark          varchar(500)              null comment '备注'
-)
+)  engine=innodb default charset=utf8
     comment '用户信息表';
 
 
@@ -60,7 +60,7 @@ create table sys_logininfo (
   msg            varchar(255)   default ''                comment '提示消息',
   login_time     datetime                                 comment '访问时间',
   primary key (info_id)
-) engine=innodb auto_increment=100 comment = '系统访问记录';
+) engine=innodb auto_increment=100  default charset=utf8 comment = '系统访问记录';
 
 
 -- ----------------------------
@@ -80,5 +80,5 @@ create table sys_user_online (
   last_access_time  datetime                                comment 'session最后访问时间',
   expire_time       int(5)        default 0                 comment '超时时间，单位为分钟',
   primary key (sessionId)
-) engine=innodb comment = '在线用户记录';
+) engine=innodb default charset=utf8 comment = '在线用户记录';
 

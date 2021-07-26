@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="loginTime"     column="login_time"        />
 	</resultMap>
 
-	<insert id="insertLogininfor" parameterType="cn.ycl.system.domain.SysLogininfo">
+	<insert id="insertLogininfo" parameterType="cn.ycl.system.domain.SysLogininfo">
 		insert into sys_logininfo (login_name, status, ipaddr, login_location, browser, os, msg, login_time)
 		values (#{loginName}, #{status}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{msg}, sysdate())
 	</insert>

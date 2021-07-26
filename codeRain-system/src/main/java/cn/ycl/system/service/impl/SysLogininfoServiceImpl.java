@@ -27,11 +27,11 @@ public class SysLogininfoServiceImpl implements ISysLogininfoService {
     /**
      * 新增系统登录日志
      *
-     * @param logininfor 访问日志对象
+     * @param logininfo 访问日志对象
      */
     @Override
-    public void insertLogininfo(SysLogininfo logininfor) {
-        logininfoMapper.insertLogininfor(logininfor);
+    public void insertLogininfo(SysLogininfo logininfo) {
+        logininfoMapper.insertLogininfo(logininfo);
     }
 
     /**

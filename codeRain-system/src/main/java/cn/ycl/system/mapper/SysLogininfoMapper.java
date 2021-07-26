@@ -14,9 +14,9 @@ public interface SysLogininfoMapper {
     /**
      * 新增系统登录日志
      * 
-     * @param logininfor 访问日志对象
+     * @param logininfo 访问日志对象
      */
-    void insertLogininfor(SysLogininfo logininfor);
+    void insertLogininfo(SysLogininfo logininfo);
 
     /**
      * 查询系统登录日志集合
