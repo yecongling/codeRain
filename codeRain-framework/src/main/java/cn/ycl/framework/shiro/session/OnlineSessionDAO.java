@@ -18,5 +18,12 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO {
      */
     private static final String LAST_SYNC_DB_TIMESTAMP = OnlineSessionDAO.class.getName() + "LAST_SYNC_DB_TIMESTAMP";
 
+    public OnlineSessionDAO(){
+        super();
+    }
+
+    public OnlineSessionDAO(long expireTime){
+        super();
+    }
 
 }
