@@ -65,7 +65,7 @@ public class SysRegisterService {
                 msg = "注册失败，请联系管理员处理";
             } else {
                 // 记录登录信息
-                AsyncManager.me().execute(AsyncFactory.recordLogininfo(loginName, Constants.REGISTER, MessageUtils.message("user.register.success")));
+                AsyncManager.me().execute(AsyncFactory.recordLoginInfo(loginName, Constants.REGISTER, MessageUtils.message("user.register.success")));
             }
         }
         return msg;

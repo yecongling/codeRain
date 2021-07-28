@@ -4,11 +4,11 @@ import cn.ycl.common.constant.Constants;
 import cn.ycl.common.utils.*;
 import cn.ycl.common.utils.spring.SpringUtils;
 import cn.ycl.framework.shiro.session.OnlineSession;
-import cn.ycl.system.domain.SysLogininfo;
+import cn.ycl.system.domain.SysLoginInfo;
 import cn.ycl.system.domain.SysOperLog;
 import cn.ycl.system.domain.SysUserOnline;
 import cn.ycl.system.service.ISysOperLogService;
-import cn.ycl.system.service.impl.SysLogininfoServiceImpl;
+import cn.ycl.system.service.impl.SysLoginInfoServiceImpl;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,7 +73,7 @@ public class AsyncFactory {
      * @param args     列表
      * @return 任务task
      */
-    public static TimerTask recordLogininfo(final String username, final String status, final String message, final Object... args) {
+    public static TimerTask recordLoginInfo(final String username, final String status, final String message, final Object... args) {
         final UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
         final String ip = ShiroUtils.getIp();
         return new TimerTask() {
@@ -93,7 +93,7 @@ public class AsyncFactory {
                 // 获取客户端浏览器
                 String browser = userAgent.getBrowser().getName();
                 // 封装对象
-                SysLogininfo logininfor = new SysLogininfo();
+                SysLoginInfo logininfor = new SysLoginInfo();
                 logininfor.setLoginName(username);
                 logininfor.setIpaddr(ip);
                 logininfor.setLoginLocation(address);
@@ -107,7 +107,7 @@ public class AsyncFactory {
                     logininfor.setStatus(Constants.FAIL);
                 }
                 // 插入数据
-                SpringUtils.getBean(SysLogininfoServiceImpl.class).insertLogininfo(logininfor);
+                SpringUtils.getBean(SysLoginInfoServiceImpl.class).insertLoginInfo(logininfor);
             }
         };
     }

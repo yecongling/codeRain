@@ -56,12 +56,12 @@ public class SysPasswordService {
             loginRecordCache.put(loginName, retryCount);
         }
         if (retryCount.incrementAndGet() > Integer.parseInt(maxRetryCount)){
-            AsyncManager.me().execute(AsyncFactory.recordLogininfo(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.exceed", maxRetryCount)));
+            AsyncManager.me().execute(AsyncFactory.recordLoginInfo(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.exceed", maxRetryCount)));
             throw new UserPasswordRetryLimitExceedException(Integer.parseInt(maxRetryCount));
         }
         // 密码不匹配
         if (!matches(user, password)){
-            AsyncManager.me().execute(AsyncFactory.recordLogininfo(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.count", retryCount)));
+            AsyncManager.me().execute(AsyncFactory.recordLoginInfo(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.count", retryCount)));
             loginRecordCache.put(loginName, retryCount);
             throw new UserPasswordNotMatchException();
         } else {

@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  * @author ruoyi
  */
-public class SysLogininfo extends BaseEntity {
+public class SysLoginInfo extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** ID */

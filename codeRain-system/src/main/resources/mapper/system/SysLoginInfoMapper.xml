@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.ycl.system.mapper.SysLogininfoMapper">
+<mapper namespace="cn.ycl.system.mapper.SysLoginInfoMapper">
 
-	<resultMap type="cn.ycl.system.domain.SysLogininfo" id="SysLogininforResult">
+	<resultMap type="cn.ycl.system.domain.SysLoginInfo" id="SysLoginInfoResult">
 		<id     property="infoId"        column="info_id"           />
 		<result property="loginName"     column="login_name"        />
 		<result property="status"        column="status"            />
@@ -16,12 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="loginTime"     column="login_time"        />
 	</resultMap>
 
-	<insert id="insertLogininfo" parameterType="cn.ycl.system.domain.SysLogininfo">
+	<insert id="insertLoginInfo" parameterType="cn.ycl.system.domain.SysLoginInfo">
 		insert into sys_logininfo (login_name, status, ipaddr, login_location, browser, os, msg, login_time)
 		values (#{loginName}, #{status}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{msg}, sysdate())
 	</insert>
 	
-	<select id="selectLogininfoList" parameterType="cn.ycl.system.domain.SysLogininfo" resultMap="SysLogininforResult">
+	<select id="selectLoginInfoList" parameterType="cn.ycl.system.domain.SysLoginInfo" resultMap="SysLoginInfoResult">
 		select info_id,login_name,ipaddr,login_location,browser,os,status,msg,login_time from sys_logininfo
 		<where>
 			<if test="ipaddr != null and ipaddr != ''">
@@ -42,14 +42,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
-	<delete id="deleteLogininfoByIds" parameterType="String">
+	<delete id="deleteLoginInfoByIds" parameterType="String">
  		delete from sys_logininfo where info_id in
  		<foreach collection="array" item="infoId" open="(" separator="," close=")">
  			#{infoId}
         </foreach> 
  	</delete>
     
-    <update id="cleanLogininfo">
+    <update id="cleanLoginInfo">
         truncate table sys_logininfo
     </update>
     
