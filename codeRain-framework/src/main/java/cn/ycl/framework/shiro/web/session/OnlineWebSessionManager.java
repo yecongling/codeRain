@@ -111,7 +111,12 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager {
         }
         Date expiredDate = DateUtils.addMilliseconds(new Date(), -timeout);
         ISysUserOnlineService userOnlineService = SpringUtils.getBean(ISysUserOnlineService.class);
-        List<SysUserOnline> userOnlineList = userOnlineService.selectOnlineByExpired(expiredDate);
+        List<SysUserOnline> userOnlineList = null;
+        try {
+            userOnlineList = userOnlineService.selectOnlineByExpired(expiredDate);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
         // 批量过期删除
         List<String> needOfflineIdList = new ArrayList<String>();
         for (SysUserOnline userOnline : userOnlineList) {
@@ -130,7 +135,11 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager {
                 }
                 invalidCount++;
                 needOfflineIdList.add(userOnline.getSessionId());
-                userOnlineService.removeUserCache(userOnline.getLoginName(), userOnline.getSessionId());
+                try {
+                    userOnlineService.removeUserCache(userOnline.getLoginName(), userOnline.getSessionId());
+                } catch (Exception exception) {
+                    log.error(exception.getMessage());
+                }
             }
 
         }
