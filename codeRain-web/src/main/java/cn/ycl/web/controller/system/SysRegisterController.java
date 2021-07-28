@@ -33,7 +33,14 @@ public class SysRegisterController extends BaseController {
     @PostMapping("/register.do")
     @ResponseBody
     public AjaxResult ajaxRegister(SysUser user){
-        String msg = registerService.register(user);
+        String msg = null;
+        try {
+            msg = registerService.register(user);
+        } catch (Exception e) {
+
+            // 写日志文件
+            e.printStackTrace();
+        }
         return StringUtils.isEmpty(msg) ? success() : error(msg);
     }
 

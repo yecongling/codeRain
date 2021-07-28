@@ -13,42 +13,42 @@ import java.util.List;
 @Service
 public class SysUserOnlineServiceImpl implements ISysUserOnlineService {
     @Override
-    public SysUserOnline selectOnlineById(String sessionId) {
+    public SysUserOnline selectOnlineById(String sessionId) throws Exception {
         return null;
     }
 
     @Override
-    public void deleteOnlineById(String sessionId) {
+    public void deleteOnlineById(String sessionId) throws Exception {
 
     }
 
     @Override
-    public void batchDeleteOnline(List<String> sessions) {
+    public void batchDeleteOnline(List<String> sessions) throws Exception {
 
     }
 
     @Override
-    public void saveOnline(SysUserOnline online) {
+    public void saveOnline(SysUserOnline online) throws Exception {
 
     }
 
     @Override
-    public List<SysUserOnline> selectUserOnlineList(SysUserOnline userOnline) {
+    public List<SysUserOnline> selectUserOnlineList(SysUserOnline userOnline) throws Exception {
         return null;
     }
 
     @Override
-    public void forceLogout(String sessionId) {
+    public void forceLogout(String sessionId) throws Exception {
 
     }
 
     @Override
-    public void removeUserCache(String loginName, String sessionId) {
+    public void removeUserCache(String loginName, String sessionId) throws Exception {
 
     }
 
     @Override
-    public List<SysUserOnline> selectOnlineByExpired(Date expiredDate) {
+    public List<SysUserOnline> selectOnlineByExpired(Date expiredDate) throws Exception {
         return null;
     }
 }

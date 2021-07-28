@@ -30,7 +30,7 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
      * @param loginInfo 访问日志对象
      */
     @Override
-    public void insertLoginInfo(SysLoginInfo loginInfo) {
+    public void insertLoginInfo(SysLoginInfo loginInfo) throws Exception{
         loginInfoMapper.insertLoginInfo(loginInfo);
     }
 
@@ -41,7 +41,7 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
      * @return 登录记录集合
      */
     @Override
-    public List<SysLoginInfo> selectLoginInfoList(SysLoginInfo loginInfo) {
+    public List<SysLoginInfo> selectLoginInfoList(SysLoginInfo loginInfo)  throws Exception{
         return null;
     }
 
@@ -52,7 +52,7 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
      * @return
      */
     @Override
-    public int deleteLoginInfoByIds(String ids) {
+    public int deleteLoginInfoByIds(String ids) throws Exception {
         return 0;
     }
 
@@ -60,7 +60,7 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
      * 清空系统登录日志
      */
     @Override
-    public void cleanLoginInfo() {
+    public void cleanLoginInfo()  throws Exception{
 
     }
 }

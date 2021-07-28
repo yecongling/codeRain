@@ -10,27 +10,27 @@ import java.util.List;
  */
 public class SysOperLogServiceImpl implements ISysOperLogService {
     @Override
-    public void insertOperlog(SysOperLog operLog) {
+    public void insertOperlog(SysOperLog operLog) throws Exception {
 
     }
 
     @Override
-    public List<SysOperLog> selectOperLogList(SysOperLog operLog) {
+    public List<SysOperLog> selectOperLogList(SysOperLog operLog) throws Exception {
         return null;
     }
 
     @Override
-    public int deleteOperLogByIds(String ids) {
+    public int deleteOperLogByIds(String ids) throws Exception {
         return 0;
     }
 
     @Override
-    public SysOperLog selectOperLogById(Long operId) {
+    public SysOperLog selectOperLogById(Long operId) throws Exception {
         return null;
     }
 
     @Override
-    public void cleanOperLog() {
+    public void cleanOperLog() throws Exception {
 
     }
 }

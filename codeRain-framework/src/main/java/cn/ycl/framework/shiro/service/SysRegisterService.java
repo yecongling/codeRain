@@ -41,7 +41,7 @@ public class SysRegisterService {
      * @param user 用户信息
      * @return
      */
-    public String register(SysUser user){
+    public String register(SysUser user) throws Exception {
         String msg = "", loginName = user.getLoginName(), password = user.getPassword();
 
         if (StringUtils.isEmpty(loginName)){
