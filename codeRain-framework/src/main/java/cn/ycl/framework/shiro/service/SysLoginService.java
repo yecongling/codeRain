@@ -45,7 +45,7 @@ public class SysLoginService {
      * @param password 密码
      * @return 返回用户信息
      */
-    public SysUser login(String username, String password) {
+    public SysUser login(String username, String password) throws Exception {
 
         // 用户名或密码错误
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
@@ -95,7 +95,7 @@ public class SysLoginService {
     /**
      * 记录登录信息
      */
-    public void recordLoginInfo(SysUser user){
+    public void recordLoginInfo(SysUser user) throws Exception {
         user.setLoginIp(ShiroUtils.getIp());
         user.setLoginDate(DateUtils.getNowDate());
         userService.updateUserInfo(user);

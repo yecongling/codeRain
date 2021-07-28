@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuretion status="off">
+    <Properties>
+        <Property name="logdir">D:/logs</Property>
+        <Property name="logfile-app">web-app</Property>
+        <Property name="logfile-alm">web-alm</Property>
+        <Property name="logfile-ope">web-ope</Property>
+        <Property name="layout">%d %5p [%T]%c{1}#%M %m%n</Property>
+        <Property name="layout-alm">%d ALERM [%T]%c{1}#%M %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="${layout}" />
+        </Console>
+
+        <RollingFile name="app" append="true"
+                     fileName="${logdir}/${logfile-app}.log"
+                     filePattern="${logdir}/${logfile-app}.%d{yyyyMMdd}.log">
+            <PatternLayout pattern="${layout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${logdir}" maxDepth="1">
+                    <IfFileName glob="${logfile-app}.*.log" />
+                    <IfLastModified age="31d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="alm" append="true"
+                     fileName="${logdir}/${logfile-alm}.log"
+                     filePattern="${logdir}/${logfile-alm}.%d{yyyyMMdd}.log">
+            <PatternLayout pattern="${layout-alm}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${logdir}" maxDepth="1">
+                    <IfFileName glob="${logfile-alm}.*.log" />
+                    <IfLastModified age="31d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="ope" append="true"
+                     fileName="${logdir}/${logfile-ope}.log"
+                     filePattern="${logdir}/${logfile-ope}.%d{yyyyMMdd}.log">
+            <PatternLayout pattern="${layout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${logdir}" maxDepth="1">
+                    <IfFileName glob="${logfile-ope}.*.log" />
+                    <IfLastModified age="366d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="error">
+            <AppenderRef ref="stdout" level="debug"/>
+            <AppenderRef ref="app" level="info"/>
+            <AppenderRef ref="alm" level="error" />
+        </Root>
+        <Logger name="org.mybatis" level="error" additivity="false"/>
+        <Logger name="org.springframework" level="error" additivity="false"/>
+        <Logger name="operation" level="error" additivity="false">
+            <AppenderRef ref="ope" />
+        </Logger>
+    </Loggers>
+</Configuretion>

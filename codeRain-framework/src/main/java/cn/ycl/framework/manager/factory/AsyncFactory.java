@@ -59,7 +59,11 @@ public class AsyncFactory {
             public void run() {
                 // 远程查询操作地点
                 operLog.setOperLocation(AddressUtils.getRealAddressByIP(operLog.getOperIp()));
-                SpringUtils.getBean(ISysOperLogService.class).insertOperlog(operLog);
+                try {
+                    SpringUtils.getBean(ISysOperLogService.class).insertOperlog(operLog);
+                } catch (Exception e) {
+                    sys_user_logger.error(e.getMessage());
+                }
             }
         };
     }
@@ -107,7 +111,11 @@ public class AsyncFactory {
                     logininfor.setStatus(Constants.FAIL);
                 }
                 // 插入数据
-                SpringUtils.getBean(SysLoginInfoServiceImpl.class).insertLoginInfo(logininfor);
+                try {
+                    SpringUtils.getBean(SysLoginInfoServiceImpl.class).insertLoginInfo(logininfor);
+                } catch (Exception e) {
+                    sys_user_logger.error(e.getMessage());
+                }
             }
         };
     }
