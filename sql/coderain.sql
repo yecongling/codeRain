@@ -8,8 +8,6 @@ create table if not exists sys_menu
     url         varchar(200) default '#' null comment '请求地址',
     menu_type   char         default ''  null comment '菜单类型（M目录 C菜单）',
     visible     char         default '0' null comment '菜单状态（0显示 1隐藏）',
-    is_refresh  char         default '1' null comment '是否刷新（0刷新 1不刷新）',
-    perms       varchar(100)             null comment '权限标识',
     icon        varchar(100) default '#' null comment '菜单图标',
     create_by   varchar(64)  default ''  null comment '创建者',
     create_time datetime                 null comment '创建时间',
