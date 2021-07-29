@@ -68,7 +68,7 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
      *
      * @param sessionValidationInterval
      */
-    public void setSessionValidationInterval(long sessionValidationInterval){
+    public void setSessionValidationInterval(long sessionValidationInterval) {
         this.sessionValidationInterval = sessionValidationInterval;
     }
 
@@ -79,7 +79,7 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
     public void enableSessionValidation() {
         enabled = true;
 
-        if (log.isDebugEnabled()){
+        if (log.isDebugEnabled()) {
             log.debug("Scheduling session validation job using Spring Scheduler with "
                     + "session validation interval of [" + sessionValidationInterval + "]ms...");
         }
@@ -94,11 +94,11 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
             }, 1000, sessionValidationInterval * 60 * 1000, TimeUnit.MILLISECONDS);
 
             this.enabled = true;
-            if (log.isDebugEnabled()){
+            if (log.isDebugEnabled()) {
                 log.debug("Session validation job successfully scheduled with Spring Scheduler.");
             }
-        } catch (Exception e){
-            if (log.isErrorEnabled()){
+        } catch (Exception e) {
+            if (log.isErrorEnabled()) {
                 log.error("Error starting the Spring Scheduler session validation job.  Session validation may not occur.", e);
             }
         }
@@ -108,13 +108,11 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
      * 关闭session验证
      */
     public void disableSessionValidation() {
-        if (log.isDebugEnabled())
-        {
+        if (log.isDebugEnabled()) {
             log.debug("Stopping Spring Scheduler session validation job...");
         }
 
-        if (this.enabled)
-        {
+        if (this.enabled) {
             Threads.shutdownAndAwaitTermination(executorService);
         }
         this.enabled = false;
