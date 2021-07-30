@@ -3,6 +3,11 @@
  * Copyright (c) 2019 ruoyi
  */
 
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
 /** 基础通用 **/
 .pt5 {
     padding-top: 5px;
