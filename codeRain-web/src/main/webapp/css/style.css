@@ -35,6 +35,15 @@ a:focus {
     outline: none;
 }
 
+.page-block {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 3px;
+    display: inline-block;
+    background-color: #fff;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 6px;
+}
+
 .nav>li>a {
     color: #fff;
     font-weight: 600;
@@ -478,7 +487,7 @@ body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
     top: 0px;
     padding: 10px 10px 10px 10px;
     text-align: center;
-    background-color: #243747;
+    background-color: #9969a9db;
 }
 
 .fixed-sidebar.mini-navbar .nav li:hover>.nav-second-level {

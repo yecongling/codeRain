@@ -1,0 +1,10 @@
+/* 个人中心 */
+div.page-left{
+    width: 25%;
+    min-height: 300px;
+}
+
+div.page-right{
+    width: calc(75% - 16px);
+    min-height: 300px;
+}
