@@ -36,7 +36,7 @@ a:focus {
 }
 
 .nav>li>a {
-    color: #a7b1c2;
+    color: #fff;
     font-weight: 600;
     padding: 14px 20px 14px 25px;
 }
@@ -66,14 +66,23 @@ a:focus {
     padding: 2px 4px;
     line-height: .9;
 }
-.nav.navbar-right>li>a:hover, .nav.navbar-left>li>a:hover {
-    background-color: #367fa9;
+.nav.navbar-right>li>a:hover{
+    background-color: #d0bd5fbf;
     color: #fff;
 }
 
-.navbar-default .nav>li>a:hover,
+.nav.navbar-left>li>a:hover{
+    color: #fff;
+    background-color: #c781b5;
+}
+
+.nav.navbar-left>li.active{
+    background-color: #d1a7d6 !important;
+}
+
+  .navbar-default .nav>li>a:hover,
 .navbar-default .nav>li>a:focus {
-    background-color: #293846;
+    background-color: #805f90;
     color: white;
 }
 
@@ -3398,7 +3407,7 @@ nav.page-tabs .page-tabs-content {
     border-image: none;
     border-style: solid;
     border-width: 1px;
-    color: #555555;
+    color: #fff;
     cursor: default;
 }
 
@@ -6658,7 +6667,7 @@ body.rtls .top-navigation .footer.fixed, body.rtls.top-navigation .footer.fixed 
 }
 
 .navbar-static-side {
-    background: #2f4050;
+    background-image: linear-gradient(to bottom, #b774a5, #ce6ed400);
 }
 
 .nav-close {
@@ -6951,7 +6960,7 @@ body.rtls .top-navigation .footer.fixed, body.rtls.top-navigation .footer.fixed 
 }
 
 nav .logo {
-    background-color: #2aa1e6;
+    background-color: #916794;
     color: #fff;
     border-bottom: 0 solid transparent;
     -webkit-transition: width .3s ease-in-out;

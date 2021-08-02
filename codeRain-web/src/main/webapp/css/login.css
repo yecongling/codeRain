@@ -3,7 +3,7 @@ html {
 }
 body.signin {
     height:auto;
-    background:url(/images/login_back.jpg) no-repeat center fixed;
+    background:url(/images/idea_backgroundImage.jpg) no-repeat center fixed;
     -webkit-background-size:cover;
     -moz-background-size:cover;
     -o-background-size:cover;
@@ -49,7 +49,7 @@ img.user-image{
     margin-top:15px
 }
 .signinpanel form {
-    background:rgba(255,255,255,.3);
+    background:rgba(255,255,255,.2);
     border:1px solid rgba(255,255,255,.3);
     -moz-box-shadow:0 3px 0 rgba(12,12,12,.03);
     -webkit-box-shadow:0 3px 0 rgba(12,12,12,.03);
