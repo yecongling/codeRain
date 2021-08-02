@@ -1,7 +1,14 @@
 package cn.ycl.web.controller.system;
 
+import cn.ycl.common.constant.ShiroConstants;
 import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.core.domain.AjaxResult;
+import cn.ycl.common.core.domain.entity.SysUser;
+import cn.ycl.common.utils.ServletUtils;
+import cn.ycl.common.utils.ShiroUtils;
+import cn.ycl.common.utils.StringUtils;
+import cn.ycl.framework.shiro.service.SysPasswordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class SysIndexController extends BaseController {
+
+    private SysPasswordService passwordService;
+
+    @Autowired
+    public void setPasswordService(SysPasswordService passwordService) {
+        this.passwordService = passwordService;
+    }
 
     /**
      * 主页
@@ -51,12 +65,22 @@ public class SysIndexController extends BaseController {
     }
 
     /**
-     * 锁屏
-     * @return
+     * 解锁屏幕
+     * @param password 输入密码
+     * @return 返回成功或者失败
      */
     @PostMapping("/unlockscreen.do")
     @ResponseBody
-    public AjaxResult unlockscreen(){
-        return success();
+    public AjaxResult unlockscreen(String password){
+
+        SysUser sysUser = ShiroUtils.getSysUser();
+        if (StringUtils.isNull(sysUser)){
+            return AjaxResult.error("服务器超时，请重新登录！");
+        }
+        if (passwordService.matches(sysUser, password)){
+            ServletUtils.getSession().removeAttribute(ShiroConstants.LOCK_SCREEN);
+            return AjaxResult.success();
+        }
+        return AjaxResult.error("密码输入不正确，请重新输入");
     }
 }
