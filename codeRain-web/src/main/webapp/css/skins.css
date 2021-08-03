@@ -1,6 +1,6 @@
 ﻿
 .nav-tabs {
-    border-bottom: 0px;
+    border-bottom: 0;
 }
 
 .navbar .navbar-toolbar>li>a {
@@ -138,10 +138,7 @@
 
 .skin-blue .sidebar-form input[type="text"] {
 	color: #666;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 2px
+	border-radius: 2px 0 0 2px;
 }
 
 .skin-blue .sidebar-form input[type="text"]:focus,
@@ -156,10 +153,7 @@
 
 .skin-blue .sidebar-form .btn {
 	color: #999;
-	border-top-left-radius: 0;
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 2px;
-	border-bottom-left-radius: 0
+	border-radius: 0 2px 2px 0;
 }
 
 .skin-blue.layout-top-nav>.logo {
@@ -320,10 +314,7 @@
 
 .skin-green .sidebar-form input[type="text"] {
 	color: #666;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 2px
+	border-radius: 2px 0 0 2px;
 }
 
 .skin-green .sidebar-form input[type="text"]:focus,
@@ -338,10 +329,7 @@
 
 .skin-green .sidebar-form .btn {
 	color: #999;
-	border-top-left-radius: 0;
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 2px;
-	border-bottom-left-radius: 0
+	border-radius: 0 2px 2px 0;
 }
 
 /** 红色主题 skin-red **/
@@ -478,10 +466,7 @@
 
 .skin-red .sidebar-form input[type="text"] {
 	color: #fff;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 2px
+	border-radius: 2px 0 0 2px;
 }
 
 .skin-red .sidebar-form input[type="text"]:focus,
@@ -496,10 +481,7 @@
 
 .skin-red .sidebar-form .btn {
 	color: #999;
-	border-top-left-radius: 0;
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 2px;
-	border-bottom-left-radius: 0
+	border-radius: 0 2px 2px 0;
 }
 
 /** 黄色主题 skin-red **/
@@ -636,10 +618,7 @@
 
 .skin-yellow .sidebar-form input[type="text"] {
 	color: #666;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 2px
+	border-radius: 2px 0 0 2px;
 }
 
 .skin-yellow .sidebar-form input[type="text"]:focus,
@@ -654,10 +633,7 @@
 
 .skin-yellow .sidebar-form .btn {
 	color: #999;
-	border-top-left-radius: 0;
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 2px;
-	border-bottom-left-radius: 0
+	border-radius: 0 2px 2px 0;
 }
 
 /** 紫色主题 skin-purple **/
@@ -794,10 +770,7 @@
 
 .skin-purple .sidebar-form input[type="text"] {
 	color: #666;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 2px
+	border-radius: 2px 0 0 2px;
 }
 
 .skin-purple .sidebar-form input[type="text"]:focus,
@@ -812,10 +785,7 @@
 
 .skin-purple .sidebar-form .btn {
 	color: #999;
-	border-top-left-radius: 0;
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 2px;
-	border-bottom-left-radius: 0
+	border-radius: 0 2px 2px 0;
 }
 
 /*
