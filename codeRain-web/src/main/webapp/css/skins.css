@@ -11,6 +11,7 @@
 .navbar, .skin-blue .navbar {
 	/*background-color: #4bb3ef*/
 	background-image: linear-gradient(to right, #ac78b9, #c5b45f);
+
 }
 
 .skin-blue .navbar-default .nav>li.selected>a,
