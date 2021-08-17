@@ -98,6 +98,8 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager {
      */
     @Override
     public void validateSessions() {
+
+        System.out.println("开始删除过期session！==============");
         if (log.isInfoEnabled()) {
             log.info("invalidation sessions...");
         }
