@@ -665,7 +665,7 @@ var table = {
             	formId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
             	$("#" + formId)[0].reset();
             	var tableId = $.common.isEmpty(tableId) ? table.options.id : tableId;
-            	if (table.options.type == table_type.bootstrapTable) {
+            	if (table.options.type === table_type.bootstrapTable) {
             		var params = $("#" + tableId).bootstrapTable('getOptions');
                     if ($.common.isNotEmpty(pageNumber)) {
                     	params.pageNumber = pageNumber;
@@ -674,7 +674,7 @@ var table = {
                     	params.pageSize = pageSize;
                     }
                     $("#" + tableId).bootstrapTable('refresh', params);
-            	} else if (table.options.type == table_type.bootstrapTreeTable) {
+            	} else if (table.options.type === table_type.bootstrapTreeTable) {
             		$("#" + tableId).bootstrapTreeTable('refresh', []);
             	}
             },
