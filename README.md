@@ -14,4 +14,6 @@
 3、2021年7月22日晚上遇到问题 No SecurityManager accessible to the calling code 
     This is an invalid application configuration.    估计原因是对应的bean的初始化时机不对，引用不起
     2021年7月26日晚解决上述问题，原因是：在初始化sessionManager时调用了SpringSessionValidationScheduler这个bean，而这个bean类中使用了set的方式注入sessionManager，导致循环引用，虽然加了@lazy注解，但是使用set方式依旧会在没有初始化sessionManager时去获取这个bean，改用成员属性注入即可
-4、
+
+
+2021年9月15日   添加系统菜单功能，添加页面，整体完成30%
