@@ -1066,9 +1066,9 @@ var table = {
             	});
             },
             // 添加信息
-            add: function(id) {
+            add: function(id, width, height) {
             	table.set();
-            	$.modal.open("添加" + table.options.modalName, $.operate.addUrl(id));
+            	$.modal.open("添加" + table.options.modalName, $.operate.addUrl(id), width, height);
             },
             // 添加信息，以tab页展现
             addTab: function (id) {
