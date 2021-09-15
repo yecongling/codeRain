@@ -28,7 +28,7 @@ public class SysIndexController extends BaseController {
      * 主页
      * @return
      */
-    @GetMapping("/index.do")
+    @GetMapping("/index")
     public String index(){
         String index = "index";
         return index;
@@ -38,7 +38,7 @@ public class SysIndexController extends BaseController {
      * 首页
      * @return
      */
-    @GetMapping("/system/main.do")
+    @GetMapping("/system/main")
     public String main(){
         return "main";
     }
@@ -47,7 +47,7 @@ public class SysIndexController extends BaseController {
      * 加载菜单
      * @return 返回菜单数据
      */
-    @PostMapping("/system/menu.do")
+    @PostMapping("/system/menu")
     @ResponseBody
     public AjaxResult getMenu() {
         AjaxResult result = new AjaxResult(AjaxResult.Type.SUCCESS, "成功！");
@@ -59,7 +59,7 @@ public class SysIndexController extends BaseController {
      * 锁屏
      * @return
      */
-    @GetMapping("/lockscreen.do")
+    @GetMapping("/lockscreen")
     public String lockscreen(){
         return "lock";
     }
@@ -69,7 +69,7 @@ public class SysIndexController extends BaseController {
      * @param password 输入密码
      * @return 返回成功或者失败
      */
-    @PostMapping("/unlockscreen.do")
+    @PostMapping("/unlockscreen")
     @ResponseBody
     public AjaxResult unlockscreen(String password){
 

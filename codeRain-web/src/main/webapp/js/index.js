@@ -9,7 +9,7 @@
     $(document).ready(function () {
         $.ajax({
             type: "post",
-            url: ctx + "system/menu.do",
+            url: ctx + "system/menu",
             success: function(r) {
                 // 构建菜单信息
             }
@@ -36,7 +36,7 @@
     }
 
     function resetPwd(){
-        var url = ctx + 'system/user/profile/resetPwd.do';
+        var url = ctx + 'system/user/profile/resetPwd';
         $.modal.open("重置密码", url, '770', '380');
     }
 
@@ -47,14 +47,14 @@
             shadeClose : true,
             title : "切换主题",
             area : ["530px", "386px"],
-            content : [ctx + "system/switchSkin.do", 'no']
+            content : [ctx + "system/switchSkin", 'no']
         })
     }
 
     /* 切换菜单 */
     function toggleMenu() {
         $.modal.confirm("确认要切换成横向菜单吗？", function() {
-            $.get(ctx + 'system/menuStyle/topnav.do', function(result) {
+            $.get(ctx + 'system/menuStyle/topnav', function(result) {
                 window.location.reload();
             });
         })
@@ -592,7 +592,7 @@
         // 锁定屏幕
         $('#lockScreen').on('click', function () {
             storage.set('lockPath', $('.page-tabs-content').find('.active').attr('data-id'));
-            location.href  = ctx + "lockscreen.do";
+            location.href  = ctx + "lockscreen";
         });
 
         // 页签刷新按钮

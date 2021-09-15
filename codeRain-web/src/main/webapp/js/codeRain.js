@@ -831,7 +831,7 @@ var table = {
             	    content: url,
             	    btn: ['确定', '关闭'],
             	    // 弹层外区域关闭
-            	    shadeClose: true,
+            	    shadeClose: false,
             	    yes: callback,
             	    cancel: function(index) {
             	        return true;

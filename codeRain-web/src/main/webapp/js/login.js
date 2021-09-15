@@ -24,7 +24,7 @@ function login() {
     var rememberMe = $("input[name='rememberme']").is(':checked');
     $.ajax({
         type: "post",
-        url: ctx + "login.do",
+        url: ctx + "login",
         data: {
             "username": username,
             "password": password,
@@ -78,10 +78,10 @@ function validateKickout() {
             if (top !== self) {
                 top.location = self.location;
             } else {
-                var url  =  location.search;
+                var url = location.search;
                 if (url) {
-                    var oldUrl  = window.location.href;
-                    self.location  = oldUrl.substring(0, oldUrl.indexOf('?'));
+                    var oldUrl = window.location.href;
+                    self.location = oldUrl.substring(0, oldUrl.indexOf('?'));
                 }
             }
         });

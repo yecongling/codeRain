@@ -30,7 +30,7 @@
 
         <div class="help-block text-center" style="margin-top: 50px;">系统锁屏,请输入密码登陆!</div>
         <div class="text-center">
-            <a href="/logout.do">退出重新登陆</a>
+            <a href="/logout">退出重新登陆</a>
         </div>
     </div>
 
@@ -92,7 +92,7 @@
 
             var index = "";
             var config = {
-                url: ctx + "unlockscreen.do",
+                url: ctx + "unlockscreen",
                 type: "post",
                 dataType: "json",
                 data: { password: password },

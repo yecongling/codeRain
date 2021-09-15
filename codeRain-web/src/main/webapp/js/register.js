@@ -22,7 +22,7 @@ function register() {
     var validateCode = $("input[name='validateCode']").val();
     $.ajax({
         type: "post",
-        url: ctx + "register.do",
+        url: ctx + "register",
         data: {
             "loginName": username,
             "password": password

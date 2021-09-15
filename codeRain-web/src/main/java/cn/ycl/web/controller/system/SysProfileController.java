@@ -10,7 +10,7 @@ public class SysProfileController extends BaseController {
 
     private String prefix = "system/user/profile";
 
-    @RequestMapping("/system/user/profile.do")
+    @RequestMapping("/system/user/profile")
     public String profile(ModelMap map){
         return prefix + "/profile";
     }

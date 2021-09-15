@@ -25,12 +25,12 @@ public class SysRegisterController extends BaseController {
         this.registerService = registerService;
     }
 
-    @GetMapping("/register.do")
+    @GetMapping("/register")
     public String register() {
         return "register/register";
     }
 
-    @PostMapping("/register.do")
+    @PostMapping("/register")
     @ResponseBody
     public AjaxResult ajaxRegister(SysUser user){
         String msg = null;

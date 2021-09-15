@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * 登录验证
  */
@@ -22,9 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 public class SystemLoginController extends BaseController {
 
 
-    @GetMapping("/login.do")
-    public String login(HttpServletRequest request, HttpServletResponse response)
-    {
+    @GetMapping("/login")
+    public String login(){
         // 如果是Ajax请求，返回Json字符串。
 //        if (ServletUtils.isAjaxRequest(request)){
 //            return ServletUtils.renderString(response, "{\"code\":\"1\",\"msg\":\"未登录或登录超时。请重新登录\"}");
@@ -33,7 +29,7 @@ public class SystemLoginController extends BaseController {
         return "login/login";
     }
 
-    @PostMapping("/login.do")
+    @PostMapping("/login")
     @ResponseBody
     public AjaxResult ajaxLogin(String username, String password, Boolean rememberMe){
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
@@ -50,7 +46,7 @@ public class SystemLoginController extends BaseController {
         }
     }
 
-    @GetMapping("logout.do")
+    @GetMapping("logout")
     public String loginOut(){
         return "login/login";
     }
