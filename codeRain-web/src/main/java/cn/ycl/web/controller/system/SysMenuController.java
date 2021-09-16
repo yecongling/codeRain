@@ -1,6 +1,7 @@
 package cn.ycl.web.controller.system;
 
 import cn.ycl.common.core.controller.BaseController;
+import cn.ycl.common.utils.ShiroUtils;
 import cn.ycl.system.domain.SysMenu;
 import cn.ycl.system.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,8 @@ public class SysMenuController extends BaseController {
     @PostMapping("/list")
     @ResponseBody
     public List<SysMenu> list(SysMenu menu){
-        //Long userId = ShiroUtils.getUserId();
-        //List<SysMenu> menuList = menuService.selectMenuList(menu, userId);
-        return null;
+        Long userId = ShiroUtils.getUserId();
+        return sysMenuService.selectMenuList(menu, userId);
     }
 
     @GetMapping("/add/{parentId}")

@@ -34,6 +34,11 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
     @Override
     public List<SysMenu> selectMenuList(SysMenu menu, Long userId) {
+        List<SysMenu> menuList = null;
+        if(SysUser.isAdmin(userId)){
+            return sysMenuMapper.selectMenuList(menu);
+        }
+
         return null;
     }
 
