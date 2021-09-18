@@ -642,7 +642,7 @@ var table = {
             	if (typeof table.options.responseHandler == "function") {
                     table.options.responseHandler(res);
                 }
-            	if (res.code != undefined && res.code != web_status.SUCCESS) {
+            	if (res.code !== undefined && res.code !== web_status.SUCCESS) {
                     $.modal.alertWarning(res.msg);
                     return [];
                 } else {
@@ -682,7 +682,7 @@ var table = {
             selectCheckeds: function(name) {
             	var checkeds = "";
                 $('input:checkbox[name="' + name + '"]:checked').each(function(i) {
-                    if (0 == i) {
+                    if (0 === i) {
                         checkeds = $(this).val();
                     } else {
                         checkeds += ("," + $(this).val());
@@ -694,7 +694,7 @@ var table = {
             selectSelects: function(name) {
             	var selects = "";
             	$('#' + name + ' option:selected').each(function (i) {
-            	    if (0 == i) {
+            	    if (0 === i) {
             	        selects = $(this).val();
             	    } else {
             	        selects += ("," + $(this).val());
@@ -708,9 +708,9 @@ var table = {
             // 显示图标
             icon: function(type) {
                 var icon = "";
-                if (type == modal_status.WARNING) {
+                if (type === modal_status.WARNING) {
                     icon = 0;
-                } else if (type == modal_status.SUCCESS) {
+                } else if (type === modal_status.SUCCESS) {
                     icon = 1;
                 } else if (type == modal_status.FAIL) {
                     icon = 2;
@@ -741,7 +741,7 @@ var table = {
             },
             // 弹出提示
             alert: function(content, type) {
-                layer.alert(content, {
+                top.layer.alert(content, {
                     icon: $.modal.icon(type),
                     title: "系统提示",
                     btn: ['确认'],
@@ -750,7 +750,7 @@ var table = {
             },
             // 消息提示并刷新父窗体
             msgReload: function(msg, type) {
-            	layer.msg(msg, {
+                top.layer.msg(msg, {
             	    icon: $.modal.icon(type),
             	    time: 500,
             	    shade: [0.1, '#8F8F8F']
@@ -777,21 +777,21 @@ var table = {
                     var index = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index);
                 } else {
-                    layer.close(index);
+                    top.layer.close(index);
                 }
             },
             // 关闭全部窗体
             closeAll: function () {
-                layer.closeAll();
+                top.layer.closeAll();
             },
             // 确认窗体
             confirm: function (content, callBack) {
-                layer.confirm(content, {
+                top.layer.confirm(content, {
                     icon: 3,
                     title: "系统提示",
                     btn: ['确认', '取消']
                 }, function (index) {
-                    layer.close(index);
+                    top.layer.close(index);
                     callBack(true);
                 });
             },
@@ -820,7 +820,7 @@ var table = {
                         iframeWin.contentWindow.submitHandler(index, layero);
                     }
                 }
-            	layer.open({
+            	top.layer.open({
             	    type: 2,
             	    area: [width + 'px', height + 'px'],
             	    fix: false,
@@ -864,7 +864,7 @@ var table = {
                         }
                     }
                 }
-                var index = layer.open($.extend({
+                var index = top.layer.open($.extend({
                     type: 2,
                     maxmin: $.common.isEmpty(options.maxmin) ? true : options.maxmin,
                     shade: 0.3,
@@ -903,7 +903,7 @@ var table = {
                 if ($.common.isEmpty(height)) {
                 	height = ($(window).height() - 50);
                 }
-                var index = layer.open({
+                var index = top.layer.open({
                     type: 2,
                     area: [width + 'px', height + 'px'],
                     fix: false,
@@ -1035,7 +1035,7 @@ var table = {
             	table.set();
             	$.modal.confirm("确定删除该条" + table.options.modalName + "信息吗？", function() {
                     var url = $.common.isEmpty(id) ? table.options.removeUrl : table.options.removeUrl.replace("{id}", id);
-                    if(table.options.type == table_type.bootstrapTreeTable) {
+                    if(table.options.type === table_type.bootstrapTreeTable) {
                     	$.operate.get(url);
                     } else {
                     	var data = { "ids": id };
@@ -1047,7 +1047,7 @@ var table = {
             removeAll: function() {
             	table.set();
             	var rows = $.common.isEmpty(table.options.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns(table.options.uniqueId);
-            	if (rows.length == 0) {
+            	if (rows.length === 0) {
             	    $.modal.alertWarning("请至少选择一条记录");
             	    return;
             	}
