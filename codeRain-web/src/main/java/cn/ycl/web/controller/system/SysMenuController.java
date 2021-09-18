@@ -3,6 +3,7 @@ package cn.ycl.web.controller.system;
 import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.utils.ShiroUtils;
 import cn.ycl.system.domain.SysMenu;
+import cn.ycl.system.domain.ZTree;
 import cn.ycl.system.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,11 @@ public class SysMenuController extends BaseController {
     @Autowired
     public void setSysMenuService(ISysMenuService sysMenuService) {
         this.sysMenuService = sysMenuService;
+    }
+
+    @GetMapping()
+    public String menu() {
+        return "system/menu/menu";
     }
 
     @PostMapping("/list")
@@ -45,6 +51,16 @@ public class SysMenuController extends BaseController {
         return sysMenuService.checkMenuNameUnique(menu);
     }
 
+    /**
+     * 加载所有菜单列表数
+     * @return 返回所有菜单列表
+     */
+    @GetMapping("/menuTreeData")
+    @ResponseBody
+    public List<ZTree> getMenuTreeData(){
+        Long userId = ShiroUtils.getUserId();
+        return sysMenuService.menuTreeData(userId);
+    }
 
     /**
      * 选择菜单树

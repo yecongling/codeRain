@@ -2,6 +2,7 @@ package cn.ycl.system.service;
 
 import cn.ycl.common.core.domain.entity.SysUser;
 import cn.ycl.system.domain.SysMenu;
+import cn.ycl.system.domain.ZTree;
 
 import java.util.List;
 import java.util.Map;
@@ -59,7 +60,7 @@ public  interface ISysMenuService {
      * @param userId 用户ID
      * @return 菜单列表
      */
-    //List<Ztree> menuTreeData(Long userId);
+    List<ZTree> menuTreeData(Long userId);
 
     /**
      * 查询系统所有权限

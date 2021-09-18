@@ -9,16 +9,54 @@
     $(document).ready(function () {
         $.ajax({
             type: "post",
-            url: ctx + "system/menu",
+            url: ctx + "system/menu/list",
             success: function(r) {
                 // 构建菜单信息
+                var menus = [];
+                // 目录信息
+                var category = '';
+                for (var i = 0; i < r.length; i++) {
+                    var menu = r[i],
+                    menuType = menu['menuType'];
+                    // 目录
+                    if(menuType === '1'){
+                        category += '<li role="presentation" id="tab_'+ menu.menuId +'">' +
+                            '   <a data-toggle="tab" href="#menu_'+ menu.menuId +'" aria-expanded="false">' +
+                            '      <i class="'+ menu.icon +'"></i>' +
+                            '      <span>'+ menu.menuName +'</span>' +
+                            '    </a>' +
+                            '  </li>';
+                    } else {
+                        // 菜单
+                        var parentId = menu['parentId'];
+                        if(!menus[parentId]){
+                            menus[parentId] = '<div class="tab-pane fade height-full active" id="menu_'+ parentId +'">' +
+                                '                <ul class="nav">';
+                        }
+                        menus[parentId] += '<li>' +
+                            '                  <a class="menu-content menuItem" href="/pages/'+ menu.url +'">' +
+                            '                     <i class="'+ menu.icon +'"></i>' +
+                            '                     <span class="nav-label">'+ menu.menuName +'</span>' +
+                            '                   </a>' +
+                            '                  </li>';
+                    }
+
+                }
+                var menuHtml = '';
+                for (var j in menus){
+                    menuHtml += menus[j] + '</ul></div>';
+                }
+
+                $('#menuList').append(menuHtml);
+                $('div#navMenu ul').append(category);
+                $('div#navMenu ul li:first > a').click();
             }
         });
     });
 
 
     // 禁止使用浏览器回退
-    window.history.forward(1);
+    // window.history.forward(1);
 
     // 皮肤缓存
     var skin = storage.get("skin");
@@ -421,7 +459,7 @@
             return false;
         }
 
-        $('.menuItem').on('click', menuItem);
+        $('#menuList').on('click','.menuItem', menuItem);
 
         $('.menuBlank').on('click', menuBlank);
 

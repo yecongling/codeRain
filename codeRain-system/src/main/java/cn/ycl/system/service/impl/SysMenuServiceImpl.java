@@ -4,11 +4,13 @@ import cn.ycl.common.constant.UserConstants;
 import cn.ycl.common.core.domain.entity.SysUser;
 import cn.ycl.common.utils.StringUtils;
 import cn.ycl.system.domain.SysMenu;
+import cn.ycl.system.domain.ZTree;
 import cn.ycl.system.mapper.SysMenuMapper;
 import cn.ycl.system.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,12 +46,53 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
     @Override
     public List<SysMenu> selectMenuAll(Long userId) {
-        return null;
+        List<SysMenu> menuList;
+        if (SysUser.isAdmin(userId)){
+            menuList = sysMenuMapper.selectMenuAll();
+        } else {
+            menuList = sysMenuMapper.selectMenuAllByUserId(userId);
+        }
+        return menuList;
     }
 
     @Override
     public Set<String> selectPermsByUserId(Long userId) {
         return null;
+    }
+
+    /**
+     * 对象转菜单树
+     *
+     * @param menuList 菜单列表
+     * @return 树结构列表
+     */
+    public List<ZTree> initZTree(List<SysMenu> menuList) {
+        return initZTree(menuList, null);
+    }
+
+    /**
+     * 对象转菜单树
+     * @param menuList 菜单集合
+     * @param roleMenuList 角色已存在菜单列表
+     * @return
+     */
+    public List<ZTree> initZTree(List<SysMenu> menuList, List<String> roleMenuList){
+        ArrayList<ZTree> trees = new ArrayList<>();
+        for (SysMenu sysMenu : menuList) {
+            ZTree zTree = new ZTree();
+            zTree.setId(sysMenu.getMenuId());
+            zTree.setPId(sysMenu.getParentId());
+            zTree.setName(sysMenu.getMenuName());
+            zTree.setTitle(sysMenu.getMenuName());
+            trees.add(zTree);
+        }
+        return trees;
+    }
+
+    @Override
+    public List<ZTree> menuTreeData(Long userId) {
+        List<SysMenu> menuList = selectMenuAll(userId);
+        return initZTree(menuList);
     }
 
     @Override

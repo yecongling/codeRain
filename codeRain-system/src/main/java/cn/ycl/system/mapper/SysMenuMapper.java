@@ -11,6 +11,21 @@ import java.util.List;
 public interface SysMenuMapper {
 
     /**
+     * 查询系统所有菜单（含按钮）
+     *
+     * @return 菜单列表
+     */
+    List<SysMenu> selectMenuAll();
+
+    /**
+     * 根据用户ID查询菜单
+     *
+     * @param userId 用户ID
+     * @return 菜单列表
+     */
+    List<SysMenu> selectMenuAllByUserId(Long userId);
+
+    /**
      * 校验菜单名称是否唯一
      *
      * @param menuName 菜单名称

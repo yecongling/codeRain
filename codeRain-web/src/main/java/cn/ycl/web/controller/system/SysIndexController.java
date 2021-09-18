@@ -44,18 +44,6 @@ public class SysIndexController extends BaseController {
     }
 
     /**
-     * 加载菜单
-     * @return 返回菜单数据
-     */
-    @PostMapping("/system/menu")
-    @ResponseBody
-    public AjaxResult getMenu() {
-        AjaxResult result = new AjaxResult(AjaxResult.Type.SUCCESS, "成功！");
-        result.put("menu", "a");
-        return result;
-    }
-
-    /**
      * 锁屏
      * @return
      */

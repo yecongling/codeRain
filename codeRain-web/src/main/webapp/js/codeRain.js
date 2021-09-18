@@ -3,6 +3,23 @@
  * Copyright (c) 2019 codeRain
  */
 
+// 封装当前页面的传参
+var jui = {
+    page: {
+        params: {}
+    }
+}
+
+if(location.search.length > 1){
+    var urlParams = location.search.substr(1);
+    var params = decodeURIComponent(urlParams);
+    var p = params.split("&");
+    for (var i = 0 ; i < p.length; i++){
+        var ps = p[i].split('=');
+        jui.page.params[ps[0]] = ps[1];
+    }
+}
+
 // 当前table相关信息
 var table = {
     config: {},
@@ -527,7 +544,7 @@ var table = {
             	}
             	var actions = [];
                 $.each(datas, function(index, dict) {
-                    if (dict.dictValue == ('' + value)) {
+                    if (dict.dictValue === ('' + value)) {
                     	var listClass = $.common.equals("default", dict.listClass) || $.common.isEmpty(dict.listClass) ? "" : "badge badge-" + dict.listClass;
                     	actions.push($.common.sprintf("<span class='%s'>%s</span>", listClass, dict.dictLabel));
                         return false;
@@ -1088,7 +1105,7 @@ var table = {
             // 修改信息
             edit: function(id) {
             	table.set();
-            	if($.common.isEmpty(id) && table.options.type == table_type.bootstrapTreeTable) {
+            	if($.common.isEmpty(id) && table.options.type === table_type.bootstrapTreeTable) {
             	    var row = $("#" + table.options.id).bootstrapTreeTable('getSelections')[0];
             	    if ($.common.isEmpty(row)) {
             	        $.modal.alertWarning("请至少选择一条记录");
