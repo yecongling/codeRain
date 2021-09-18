@@ -1103,7 +1103,7 @@ var table = {
                 return url;
             },
             // 修改信息
-            edit: function(id) {
+            edit: function(id, width, height) {
             	table.set();
             	if($.common.isEmpty(id) && table.options.type === table_type.bootstrapTreeTable) {
             	    var row = $("#" + table.options.id).bootstrapTreeTable('getSelections')[0];
@@ -1112,9 +1112,9 @@ var table = {
             	        return;
             	    }
             	    var url = table.options.updateUrl.replace("{id}", row[table.options.uniqueId]);
-            	    $.modal.open("修改" + table.options.modalName, url);
+            	    $.modal.open("修改" + table.options.modalName, url, width, height);
             	} else {
-            	    $.modal.open("修改" + table.options.modalName, $.operate.editUrl(id));
+            	    $.modal.open("修改" + table.options.modalName, $.operate.editUrl(id), width, height);
             	}
             },
             // 修改信息，以tab页展现
