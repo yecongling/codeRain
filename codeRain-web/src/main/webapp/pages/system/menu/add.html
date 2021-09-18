@@ -136,7 +136,7 @@
         function selectMenuTree() {
             var treeId = $("#treeId").val();
             var menuId = treeId > 0 ? treeId : 1;
-            var url = prefix + "/selectMenuTree/" + menuId;
+            var url = "/pages" + prefix + "/tree.html?menuId=" + menuId;
             var options = {
                 title: '菜单选择',
                 width: "380",
@@ -147,10 +147,10 @@
         }
 
         function doSubmit(index, layero){
-            var body = layer.getChildFrame('body', index);
+            var body = top.layer.getChildFrame('body', index);
             $("#treeId").val(body.find('#treeId').val());
             $("#treeName").val(body.find('#treeName').val());
-            layer.close(index);
+            top.layer.close(index);
         }
 
     </script>
