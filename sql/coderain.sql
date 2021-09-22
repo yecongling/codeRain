@@ -22,6 +22,7 @@ create table if not exists sys_menu
 INSERT INTO `sys_menu` VALUES (1, 1, '系统管理', 0, 1, '#', '1', '0', 'fa fa-gear', 'admin', '2021-09-18 11:01:43', 'admin', '2021-09-18 11:01:50', '系统管理目录');
 INSERT INTO `sys_menu` VALUES (2, 1, '系统监控', 0, 2, '#', '1', '0', 'fa fa-video-camera', 'admin', '2021-09-18 11:03:37', 'admin', '2021-09-18 11:03:42', '系统监控目录');
 INSERT INTO `sys_menu` VALUES (100, 1, '菜单管理', 1, 1, 'system/menu/menu.html', '2', '0', 'fa fa-th-list', 'admin', '2021-09-18 11:07:38', 'admin', '2021-09-18 11:07:42', '菜单管理菜单');
+INSERT INTO `sys_menu` VALUES (200, 1, '在线用户', 2, 1, 'monitor/online/online.html', '2', '0', 'fa fa-user-circle', 'admin', '2021-09-22 09:34:00', 'admin', '2021-09-22 09:34:06', '在线用户菜单');
 
 /* 系统用户表 */
 create table if not exists sys_user(
