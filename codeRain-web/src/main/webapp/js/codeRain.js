@@ -319,7 +319,7 @@ var table = {
             },
             // 列超出指定长度浮动提示 target（copy单击复制文本 open弹窗打开文本）
             tooltip: function (value, length, target) {
-                var _length = $.common.isEmpty(length) ? 20 : length;
+                var _length = $.common.isEmpty(length) ? 30 : length;
                 var _text = "";
                 var _value = $.common.nullToStr(value);
                 var _target = $.common.isEmpty(target) ? 'copy' : target;
