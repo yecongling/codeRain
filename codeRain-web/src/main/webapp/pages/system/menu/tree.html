@@ -10,11 +10,26 @@
     <link rel="stylesheet" href="/css/skins.css"/>
     <link rel="stylesheet" href="/css/codeRain-ui.css"/>
     <link rel="stylesheet" href="/css/animate.min.css"/>
+    <link rel="stylesheet" href="tree.css"/>
 </head>
 <body>
-
-
-
+    <input id="treeId"   name="treeId"    type="hidden" />
+    <input id="treeName" name="treeName"  type="hidden" />
+    <div class="wrapper">
+        <div class="treeShowHideButton" onclick="$.tree.toggleSearch();">
+            <label id="btnShow" title="显示搜索" style="display:none;">︾</label>
+            <label id="btnHide" title="隐藏搜索">︽</label>
+        </div>
+    </div>
+    <div class="treeSearchInput" id="search">
+        <label for="keyword">关键字：</label>
+        <input type="text" class="empty form-control" id="keyword" maxlength="50">
+        <button class="btn btn-primary btn-sm" id="btn" onclick="$.tree.searchNode()"> 搜索 </button>
+    </div>
+    <div class="treeExpandCollapse">
+        <a href="#" onclick="$.tree.expand()">展开</a> /
+        <a href="#" onclick="$.tree.collapse()">折叠</a>
+    </div>
     <div id="tree" class="ztree "></div>
 <script type="text/javascript"> var ctx = '/';</script>
 <a id="scroll-up" href="#" class="btn btn-sm display">
@@ -35,6 +50,13 @@
         var option = {
             url: url,
             expandLevel: 1,
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: 'id',
+                    pIdKey: 'pid'
+                }
+            },
             onClick: zTreeClick
         };
 

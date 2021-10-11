@@ -1330,11 +1330,11 @@ var table = {
                         selectedMulti: false,      // 设置是否允许同时选中多个节点
                         nameIsHTML: true           // 设置 name 属性是否支持 HTML 脚本
                     },
-                    check: {
+                    /*check: {
                         enable: false,             // 置 zTree 的节点上是否显示 checkbox / radio
                         nocheckInherit: true,      // 设置子节点是否自动继承
                         chkboxType: { "Y": "ps", "N": "ps" } // 父子节点的关联关系
-                    },
+                    },*/
                     data: {
                         key: {
                             title: "title"         // 节点数据保存节点提示信息的属性名称
@@ -1342,7 +1342,7 @@ var table = {
                         simpleData: {
                             enable: true           // true / false 分别表示 使用 / 不使用 简单数据模式
                         }
-                    },
+                    }
                 };
                 var options = $.extend(defaults, options);
                 $.tree._option = options;
