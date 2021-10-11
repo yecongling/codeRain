@@ -3,7 +3,7 @@ html {
 }
 body.signin {
     height:auto;
-    background:url(/images/idea_backgroundImage.jpg) no-repeat center fixed;
+    background:url(/images/login_back.jpg) no-repeat center fixed;
     -webkit-background-size:cover;
     -moz-background-size:cover;
     -o-background-size:cover;
@@ -52,11 +52,11 @@ img.user-image{
     margin-top:15px
 }
 .signinpanel .uname {
-    background:#fff url(/images/user.png) no-repeat 95% center;
+    /*background:#fff url(/images/user.png) no-repeat 95% center;*/
     color:#333
 }
 .signinpanel .pword {
-    background:#fff url(/images/locked.png) no-repeat 95% center;
+    /*background:#fff url(/images/locked.png) no-repeat 95% center;*/
     color:#333
 }
 .signinpanel .code {
