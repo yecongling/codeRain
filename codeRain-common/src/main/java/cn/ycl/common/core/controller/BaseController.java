@@ -7,6 +7,17 @@ import cn.ycl.common.utils.StringUtils;
  * web 层通用数据处理
  */
 public class BaseController {
+
+    /**
+     * 响应返回结果
+     *
+     * @param rows 影响行数
+     * @return 操作结果
+     */
+    protected AjaxResult toAjax(int rows){
+        return rows > 0 ? success() : error();
+    }
+
     /**
      * 返回成功
      */

@@ -63,7 +63,9 @@
         $.tree.init(option);
 
         function zTreeClick(event, treeId, treeNode) {
-            console.log(treeNode);
+            // 设置值
+            $('#treeId').val(treeNode.id);
+            $('#treeName').val(treeNode.name);
         }
     });
 </script>
