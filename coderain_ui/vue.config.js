@@ -5,7 +5,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const name = process.env.VUE_APP_TITLE || 'coderain管理系统' // 网页标题
+const name = 'coderain管理系统' // 网页标题
 
 const port = process.env.port || process.env.npm_config_port || 8081 // 端口
 
