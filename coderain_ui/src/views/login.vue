@@ -77,30 +77,40 @@ export default {
               password: [
                   { required: true, trigger: 'blur', message: '请输入您的密码' }
               ],
-              code: [{ required: true, trigger: 'change', message: '请输入验证码' }]
+              code: [{ required: false, trigger: 'change', message: '请输入验证码' }]
           },
           loading: false,
           // 验证码开关
-          captchaOnOff: true,
+          captchaOnOff: false,
           // 注册开关
           register: false,
           redirect: undefined
       }
     },
+    watch: {
+        $route: {
+            handler: function(route) {
+                this.redirect = route.query && route.query.redirect;
+            },
+            immediate: true
+        }
+    },
     created() {
+      this.getCode();
       this.changeFocus()
     },
     methods: {
-
+      // 焦点
       changeFocus(){
           this.$nextTick((x) => {
               this.$refs.input.focus()
           })
       },
-
+        // 获取验证码
       getCode() {
 
       },
+        // 获取cookie
         getCookie() {
           const username = Cookies.get('username')
           const password = Cookies.get('password')
@@ -111,8 +121,30 @@ export default {
               rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
            }
         },
+        // 登录操作
         handleLogin() {
+            this.$refs.loginForm.validate(valid => {
+                if(valid){
+                    this.loading = true;
+                    if (this.loginForm.rememberMe) {
+                        Cookies.set("username", this.loginForm.username, { expires: 30 });
+                        Cookies.set("password", encrypt(this.loginForm.password), { expires: 30 });
+                        Cookies.set('rememberMe', this.loginForm.rememberMe, { expires: 30 });
+                    } else {
+                        Cookies.remove("username");
+                        Cookies.remove("password");
+                        Cookies.remove('rememberMe');
+                    }
+                    this.$store.dispatch('Login', this.loginForm).then(() => {
+                        this.$router.push({path: this.redirect || '/'}).catch(() =>{});
+                    }).catch(() => {
+                        this.loading = false;
+                        if(this.captchaOnOff){
 
+                        }
+                    })
+                }
+            })
         }
     }
 }
