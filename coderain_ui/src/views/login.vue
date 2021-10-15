@@ -3,7 +3,7 @@
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
             <h3 class="title">coderain后台管理系统</h3>
             <el-form-item prop="username">
-                <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号">
+                <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号" ref="input">
                     <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
                 </el-input>
             </el-form-item>
@@ -49,7 +49,7 @@
         </el-form>
         <!--  底部  -->
         <div class="el-login-footer">
-            <span>Copyright © 2018-2021 ruoyi.vip All Rights Reserved.</span>
+            <span>Copyright © 2018-2021 codeRain All Rights Reserved.</span>
         </div>
     </div>
 </template>
@@ -94,7 +94,7 @@ export default {
 
       changeFocus(){
           this.$nextTick((x) => {
-              this.$refs.inputs.focus()
+              this.$refs.input.focus()
           })
       },
 
@@ -123,7 +123,7 @@ export default {
         justify-content: center;
         align-items: center;
         height: 100%;
-        background-image: url("../assets/images/login-background.jpg");
+        background-image: url("../assets/images/login_back.jpg");
         background-size: cover;
     }
     .title {
