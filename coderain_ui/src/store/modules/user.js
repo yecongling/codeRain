@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/login'
-/*import { getToken, setToken, removeToken } from '@/utils/auth'*/
+import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
   state: {
@@ -70,7 +70,7 @@ const user = {
     // 退出系统
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
-        /*logout(state.token).then(() => {
+        logout(state.token).then(() => {
           commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
           commit('SET_PERMISSIONS', [])
@@ -78,7 +78,7 @@ const user = {
           resolve()
         }).catch(error => {
           reject(error)
-        })*/
+        })
       })
     },
 

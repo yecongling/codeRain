@@ -3,16 +3,25 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import layout from '@/layout'
+import Layout from '@/layout'
 
 export const constantRoutes = [
   {
-    path: '/',
-    redirect: '/login'
-  },
-  {
     path: '/login',
     component: (resolve) => require(['@/views/login'], resolve)
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: 'index',
+    children: [
+      {
+        path: 'index',
+        component: (resolve) => require(['@/views/index'], resolve),
+        name: 'Index',
+        meta: { title: '首页', icon: 'dashboard', affix: true }
+      }
+    ]
   },
   {
     path: '/about',

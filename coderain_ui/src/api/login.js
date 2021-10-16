@@ -15,3 +15,11 @@ export function login(username, password, code, uuid) {
         data: data
     })
 }
+
+// 退出方法
+export function logout() {
+    return request({
+        url: '/logout',
+        method: 'post'
+    })
+}

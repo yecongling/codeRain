@@ -1,3 +1,4 @@
+<!--中间内容区域-->
 <template>
     <section class="app-main">
         <transition name="fade-transform" mode="out-in">
@@ -28,7 +29,7 @@
         min-height: calc(100vh - 50px);
         width: 100%;
         position: relative;
-        overflow: hidden;
+        overflow: auto;
     }
 
     .fixed-header+.app-main {

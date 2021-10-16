@@ -135,14 +135,17 @@ export default {
                         Cookies.remove("password");
                         Cookies.remove('rememberMe');
                     }
-                    this.$store.dispatch('Login', this.loginForm).then(() => {
+
+                    // 先做前端，不加数据
+                    this.$router.push({path: this.redirect || '/'}).catch(() =>{});
+                    /*this.$store.dispatch('Login', this.loginForm).then(() => {
                         this.$router.push({path: this.redirect || '/'}).catch(() =>{});
                     }).catch(() => {
                         this.loading = false;
                         if(this.captchaOnOff){
 
                         }
-                    })
+                    })*/
                 }
             })
         }
