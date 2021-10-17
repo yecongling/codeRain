@@ -1,8 +1,8 @@
 import { constantRoutes } from '@/router'
-/*import { getRouters } from '@/api/menu'*/
+import { getRouters } from '@/api/menu'
 import Layout from '@/layout/index'
-/*import ParentView from '@/components/ParentView';
-import InnerLink from '@/layout/components/InnerLink'*/
+import ParentView from '@/components/ParentView';
+import InnerLink from '@/layout/components/InnerLink'
 
 const permission = {
   state: {
@@ -37,7 +37,7 @@ const permission = {
     GenerateRoutes({ commit }) {
       return new Promise(resolve => {
         // 向后端请求路由数据
-        /*getRouters().then(res => {
+        getRouters().then(res => {
           const sdata = JSON.parse(JSON.stringify(res.data))
           const rdata = JSON.parse(JSON.stringify(res.data))
           const sidebarRoutes = filterAsyncRouter(sdata)
@@ -48,7 +48,7 @@ const permission = {
           commit('SET_DEFAULT_ROUTES', sidebarRoutes)
           commit('SET_TOPBAR_ROUTES', sidebarRoutes)
           resolve(rewriteRoutes)
-        })*/
+        })
       })
     }
   }
@@ -62,7 +62,7 @@ function filterAsyncRouter(asyncRouterMap, lastRouter = false, type = false) {
     }
     if (route.component) {
       // Layout ParentView 组件特殊处理
-      /*if (route.component === 'Layout') {
+      if (route.component === 'Layout') {
         route.component = Layout
       } else if (route.component === 'ParentView') {
         route.component = ParentView
@@ -70,7 +70,7 @@ function filterAsyncRouter(asyncRouterMap, lastRouter = false, type = false) {
         route.component = InnerLink
       } else {
         route.component = loadView(route.component)
-      }*/
+      }
     }
     if (route.children != null && route.children && route.children.length) {
       route.children = filterAsyncRouter(route.children, route, type)

@@ -1,6 +1,6 @@
 {
   "name": "coderain",
-  "description": "若依管理系统",
+  "description": "coderain管理系统",
   "version": "0.1.0",
   "private": true,
   "scripts": {

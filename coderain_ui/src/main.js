@@ -8,7 +8,8 @@ import App from './App'
 import store from './store'
 import router from './router'
 
-import './assets/icons'
+import './assets/icons'  // icon
+import './permission'
 import '@/assets/styles/index.scss' // global css
 import '@/assets/styles/coderain.scss' // coderain css
 // 头部标签组件
