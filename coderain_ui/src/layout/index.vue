@@ -2,13 +2,19 @@
 <template>
     <div :class="classObj" class="app-wrapper" :style="{'--current-color': theme}">
         <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"/>
+        <!-- 左边菜单 -->
         <sidebar class="sidebar-container"/>
+        <!-- 右边全体主题内容 -->
         <div :class="{hasTagsView:needTagsView}" class="main-container">
             <div :class="{'fixed-header':fixedHeader}">
+                <!-- 第一栏的菜单（可能为一级菜单，在某些配置下） -->
                 <navbar />
+                <!-- 小菜单上的右键菜单（即关闭本路由……） -->
                 <tags-view v-if="needTagsView" />
             </div>
+            <!-- 中间主题路由（即配置的菜单内容） -->
             <app-main />
+            <!-- 右边收缩设置框 -->
             <right-panel>
                 <settings />
             </right-panel>
