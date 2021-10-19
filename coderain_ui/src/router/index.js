@@ -29,10 +29,6 @@ import Layout from '@/layout'
 // 公共路由
 export const constantRoutes = [
   {
-    path: '/',
-    redirect: '/login'
-  },
-  {
     path: '/redirect',
     component: Layout,
     hidden: true,
@@ -48,7 +44,7 @@ export const constantRoutes = [
     component: (resolve) => require(['@/views/login'], resolve),
     hidden: true
   },
-  /*{
+  {
     path: '/register',
     component: (resolve) => require(['@/views/register'], resolve),
     hidden: true
@@ -62,7 +58,7 @@ export const constantRoutes = [
     path: '/401',
     component: (resolve) => require(['@/views/error/401'], resolve),
     hidden: true
-  },*/
+  },
   {
     path: '',
     component: Layout,
@@ -76,7 +72,7 @@ export const constantRoutes = [
       }
     ]
   },
-  /*{
+  {
     path: '/user',
     component: Layout,
     hidden: true,
@@ -154,7 +150,7 @@ export const constantRoutes = [
         meta: { title: '修改生成配置', activeMenu: '/tool/gen'}
       }
     ]
-  }*/
+  }
 ]
 
 export default new Router({

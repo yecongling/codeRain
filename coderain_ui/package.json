@@ -1,11 +1,39 @@
 {
-  "name": "coderain",
-  "description": "coderain管理系统",
-  "version": "0.1.0",
-  "private": true,
+  "name": "ruoyi",
+  "version": "3.7.0",
+  "description": "若依管理系统",
+  "author": "若依",
+  "license": "MIT",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "dev": "vue-cli-service serve",
+    "build:prod": "vue-cli-service build",
+    "build:stage": "vue-cli-service build --mode staging",
+    "preview": "node build/index.js --preview",
+    "lint": "eslint --ext .js,.vue src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,vue}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "keywords": [
+    "vue",
+    "admin",
+    "dashboard",
+    "element-ui",
+    "boilerplate",
+    "admin-template",
+    "management-system"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/y_project/RuoYi-Vue.git"
   },
   "dependencies": {
     "@riophae/vue-treeselect": "0.4.0",
@@ -49,9 +77,12 @@
     "svg-sprite-loader": "5.1.1",
     "vue-template-compiler": "2.6.12"
   },
+  "engines": {
+    "node": ">=8.9",
+    "npm": ">= 3.0.0"
+  },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
-    "not dead"
+    "last 2 versions"
   ]
 }
