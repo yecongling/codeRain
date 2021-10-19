@@ -136,10 +136,6 @@ export default {
                         Cookies.remove('rememberMe');
                     }
 
-                    // 先做前端，不加数据
-                    /*this.$router.push({path: this.redirect || '/index'}).catch(() =>{
-                        this.loading = false;
-                    });*/
                     this.$store.dispatch('Login', this.loginForm).then(() => {
                         this.$router.push({path: this.redirect || '/index'}).catch(() =>{});
                     }).catch(() => {
