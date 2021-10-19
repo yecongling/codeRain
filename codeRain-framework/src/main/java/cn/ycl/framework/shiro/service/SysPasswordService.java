@@ -48,7 +48,7 @@ public class SysPasswordService {
      * @param password
      */
     public void validate(SysUser user, String password){
-        String loginName = user.getLoginName();
+        String loginName = user.getUserName();
         AtomicInteger retryCount = loginRecordCache.get(loginName);
 
         if (retryCount == null){
@@ -76,7 +76,7 @@ public class SysPasswordService {
      * @return
      */
     public boolean matches(SysUser user, String newPassword){
-        return user.getPassword().equals(encryptPassword(user.getLoginName(), newPassword, user.getSalt()));
+        return user.getPassword().equals(encryptPassword(user.getUserName(), newPassword, user.getSalt()));
     }
 
     /**

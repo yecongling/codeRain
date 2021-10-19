@@ -42,7 +42,7 @@ public class SysRegisterService {
      * @return
      */
     public String register(SysUser user) throws Exception {
-        String msg = "", loginName = user.getLoginName(), password = user.getPassword();
+        String msg = "", loginName = user.getUserName(), password = user.getPassword();
 
         if (StringUtils.isEmpty(loginName)){
             msg = "用户名不能为空";
@@ -58,7 +58,7 @@ public class SysRegisterService {
             user.setPwdUpdateDate(DateUtils.getNowDate());
             user.setUserName(loginName);
             user.setSalt(ShiroUtils.randomSalt());
-            user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
+            user.setPassword(passwordService.encryptPassword(user.getUserName(), user.getPassword(), user.getSalt()));
 
             boolean  regFlag = userService.registerUser(user);
             if (!regFlag){

@@ -43,8 +43,9 @@
     -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
-
+    <mvc:cors>
+        <mvc:mapping path="/**"
+                     allowed-origins="http://127.0.0.1:8081,http://localhost:8081"
+        allowed-methods="*" allowed-headers="*" allow-credentials="true"/>
+    </mvc:cors>
 </beans>

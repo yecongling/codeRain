@@ -13,6 +13,7 @@ import cn.ycl.common.utils.MessageUtils;
 import cn.ycl.common.utils.ShiroUtils;
 import cn.ycl.framework.manager.AsyncManager;
 import cn.ycl.framework.manager.factory.AsyncFactory;
+import cn.ycl.framework.web.service.TokenService;
 import cn.ycl.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,14 @@ import org.springframework.util.StringUtils;
  */
 @Component
 public class SysLoginService {
+
+    private TokenService tokenService;
+
+    @Autowired
+    public void setTokenService(TokenService tokenService){
+        this.tokenService = tokenService;
+    }
+
 
     private SysPasswordService passwordService;
 
@@ -39,26 +48,13 @@ public class SysLoginService {
     }
 
     /**
-     * 登录验证
-     * @param username 用户名
-     * @param password 密码
-     * @param code 验证码
-     * @param uuid 唯一标志
-     * @return 结果
-     */
-    public String login(String username, String password, String code, String uuid) {
-        return "";
-    }
-
-
-    /**
      * 登录校验
      *
      * @param username 用户名
      * @param password 密码
      * @return 返回用户信息
      */
-    public SysUser login(String username, String password) throws Exception {
+    public String login(String username, String password) throws Exception {
 
         // 用户名或密码错误
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
@@ -102,7 +98,7 @@ public class SysLoginService {
         // 记录登录日志
         AsyncManager.me().execute(AsyncFactory.recordLoginInfo(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
         recordLoginInfo(user);
-        return user;
+        return tokenService.createToken(user);
     }
 
     /**

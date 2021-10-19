@@ -6,7 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -33,11 +32,6 @@ public class SysUser extends BaseEntity {
 
     /** 角色ID */
     private Long roleId;
-
-    /**
-     * 登录名称
-     */
-    private String loginName;
 
     /**
      * 用户名称
@@ -104,6 +98,15 @@ public class SysUser extends BaseEntity {
      */
     private Date pwdUpdateDate;
 
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public SysUser() {
 
@@ -127,17 +130,6 @@ public class SysUser extends BaseEntity {
 
     public static boolean isAdmin(Long userId) {
         return userId != null && 1L == userId;
-    }
-
-
-    @NotBlank(message = "登录账号不能为空")
-    @Size(min = 0, max = 30, message = "登录账号长度不能超过30个字符")
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
     }
 
     @Size(min = 0, max = 30, message = "用户昵称长度不能超过30个字符")
@@ -253,7 +245,6 @@ public class SysUser extends BaseEntity {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("userId", getUserId())
-                .append("loginName", getLoginName())
                 .append("userName", getUserName())
                 .append("userType", getUserType())
                 .append("email", getEmail())
