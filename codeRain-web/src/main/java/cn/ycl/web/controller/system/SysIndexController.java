@@ -5,7 +5,6 @@ import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.core.domain.AjaxResult;
 import cn.ycl.common.core.domain.entity.SysUser;
 import cn.ycl.common.utils.ServletUtils;
-import cn.ycl.common.utils.ShiroUtils;
 import cn.ycl.common.utils.StringUtils;
 import cn.ycl.framework.shiro.service.SysPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,14 +60,6 @@ public class SysIndexController extends BaseController {
     @ResponseBody
     public AjaxResult unlockscreen(String password){
 
-        SysUser sysUser = ShiroUtils.getSysUser();
-        if (StringUtils.isNull(sysUser)){
-            return AjaxResult.error("服务器超时，请重新登录！");
-        }
-        if (passwordService.matches(sysUser, password)){
-            ServletUtils.getSession().removeAttribute(ShiroConstants.LOCK_SCREEN);
-            return AjaxResult.success();
-        }
         return AjaxResult.error("密码输入不正确，请重新输入");
     }
 }

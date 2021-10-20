@@ -16,7 +16,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <shiro.version>1.7.1</shiro.version>
         <druid.version>1.2.6</druid.version>
         <bitwalker.version>1.21</bitwalker.version>
         <kaptcha.version>2.3.2</kaptcha.version>
@@ -260,26 +259,6 @@
             <version>${kaptcha.version}</version>
         </dependency>
 
-        <!-- Shiro核心框架 -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-
-        <!-- Shiro使用Spring框架 -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-
-        <!-- Shiro使用EhCache缓存框架 -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-ehcache</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
 
         <!-- 解析客户端操作系统、浏览器等 -->
         <dependency>

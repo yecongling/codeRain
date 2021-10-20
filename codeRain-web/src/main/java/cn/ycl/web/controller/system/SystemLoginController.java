@@ -4,6 +4,7 @@ import cn.ycl.common.constant.Constants;
 import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.core.domain.AjaxResult;
 import cn.ycl.common.core.domain.entity.SysUser;
+import cn.ycl.common.core.domain.modle.LoginBody;
 import cn.ycl.framework.shiro.service.SysLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,10 +27,10 @@ public class SystemLoginController extends BaseController {
     }
 
     @PostMapping("/login")
-    public AjaxResult ajaxLogin(@RequestBody SysUser user){
+    public AjaxResult ajaxLogin(@RequestBody LoginBody user){
         AjaxResult ajax = AjaxResult.success();
         try {
-            String token = loginService.login(user.getUserName(), user.getPassword());
+            String token = loginService.login(user.getUsername(), user.getPassword());
             ajax.put(Constants.TOKEN, token);
         } catch (Exception e) {
             ajax = AjaxResult.error(e.getMessage());
