@@ -18,7 +18,7 @@ public class SysLoginInfo extends BaseEntity {
     private Long infoId;
 
     /** 用户账号 */
-    private String loginName;
+    private String userName;
 
     /** 登录状态 0成功 1失败 */
     private String status;
@@ -51,14 +51,12 @@ public class SysLoginInfo extends BaseEntity {
         this.infoId = infoId;
     }
 
-    public String getLoginName()
-    {
-        return loginName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLoginName(String loginName)
-    {
-        this.loginName = loginName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getStatus()
@@ -135,7 +133,7 @@ public class SysLoginInfo extends BaseEntity {
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("infoId", getInfoId())
-            .append("loginName", getLoginName())
+            .append("userName", getUserName())
             .append("ipaddr", getIpaddr())
             .append("loginLocation", getLoginLocation())
             .append("browser", getBrowser())

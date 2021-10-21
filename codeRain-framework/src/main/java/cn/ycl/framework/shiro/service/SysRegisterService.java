@@ -1,11 +1,9 @@
 package cn.ycl.framework.shiro.service;
 
-import cn.ycl.common.constant.UserConstants;
 import cn.ycl.common.core.domain.entity.SysUser;
 import cn.ycl.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * 注册校验方法
@@ -37,7 +35,7 @@ public class SysRegisterService {
      */
     public String register(SysUser user) throws Exception {
         String msg = "", loginName = user.getUserName(), password = user.getPassword();
-
+/*
         if (StringUtils.isEmpty(loginName)){
             msg = "用户名不能为空";
         } else if(StringUtils.isEmpty(password)){
@@ -50,7 +48,7 @@ public class SysRegisterService {
             msg = "注册用户" + loginName + "失败，该注册账户已存在!";
         } else {
 
-        }
+        }*/
         return msg;
     }
 

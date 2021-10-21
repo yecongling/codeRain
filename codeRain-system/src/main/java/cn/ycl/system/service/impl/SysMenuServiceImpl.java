@@ -56,6 +56,11 @@ public class SysMenuServiceImpl implements ISysMenuService {
     }
 
     @Override
+    public Set<String> selectMenuPermsByUserId(Long userId) {
+        return null;
+    }
+
+    @Override
     public Set<String> selectPermsByUserId(Long userId) {
         return null;
     }

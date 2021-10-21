@@ -1,4 +1,4 @@
-package cn.ycl.common.core.domain.modle;
+package cn.ycl.common.core.domain.model;
 
 public class LoginBody {
     /**

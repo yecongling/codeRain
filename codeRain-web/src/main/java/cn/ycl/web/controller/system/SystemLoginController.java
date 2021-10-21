@@ -3,8 +3,7 @@ package cn.ycl.web.controller.system;
 import cn.ycl.common.constant.Constants;
 import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.core.domain.AjaxResult;
-import cn.ycl.common.core.domain.entity.SysUser;
-import cn.ycl.common.core.domain.modle.LoginBody;
+import cn.ycl.common.core.domain.model.LoginBody;
 import cn.ycl.framework.shiro.service.SysLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,20 +25,23 @@ public class SystemLoginController extends BaseController {
         this.loginService = loginService;
     }
 
+    /**
+     * 登录方法
+     * @param user
+     * @return
+     */
     @PostMapping("/login")
     public AjaxResult ajaxLogin(@RequestBody LoginBody user){
         AjaxResult ajax = AjaxResult.success();
-        try {
-            String token = loginService.login(user.getUsername(), user.getPassword());
-            ajax.put(Constants.TOKEN, token);
-        } catch (Exception e) {
-            ajax = AjaxResult.error(e.getMessage());
-        }
+        // 生成令牌
+        String token = loginService.login(user.getUsername(), user.getPassword(), user.getCode(),
+                user.getUuid());
+        ajax.put(Constants.TOKEN, token);
         return ajax;
     }
 
     @GetMapping("logout")
     public String loginOut(){
-        return "login/login";
+        return "/login";
     }
 }

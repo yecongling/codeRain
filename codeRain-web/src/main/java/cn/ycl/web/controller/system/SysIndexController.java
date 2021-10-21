@@ -1,11 +1,7 @@
 package cn.ycl.web.controller.system;
 
-import cn.ycl.common.constant.ShiroConstants;
 import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.core.domain.AjaxResult;
-import cn.ycl.common.core.domain.entity.SysUser;
-import cn.ycl.common.utils.ServletUtils;
-import cn.ycl.common.utils.StringUtils;
 import cn.ycl.framework.shiro.service.SysPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

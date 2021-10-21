@@ -60,6 +60,11 @@ public class Constants {
     public static final String LOGIN_USER_KEY = "login_user_key";
 
     /**
+     * 登录用户 redis key
+     */
+    public static final String LOGIN_TOKEN_KEY = "login_tokens:";
+
+    /**
      * 当前记录起始索引
      */
     public static final String PAGE_NUM = "pageNum";

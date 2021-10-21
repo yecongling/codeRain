@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class SysOperLogServiceImpl implements ISysOperLogService {
     @Override
-    public void insertOperlog(SysOperLog operLog) throws Exception {
+    public void insertOperlog(SysOperLog operLog){
 
     }
 

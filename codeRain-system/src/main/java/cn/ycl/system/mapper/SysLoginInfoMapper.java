@@ -17,7 +17,7 @@ public interface SysLoginInfoMapper {
      * 
      * @param loginInfo 访问日志对象
      */
-    void insertLoginInfo(SysLoginInfo loginInfo) throws SQLException;
+    void insertLoginInfo(SysLoginInfo loginInfo);
 
     /**
      * 查询系统登录日志集合
