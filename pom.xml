@@ -27,7 +27,7 @@
         <commons.io.version>2.10.0</commons.io.version>
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <poi.version>4.1.2</poi.version>
-        <spring.version>5.0.2.RELEASE</spring.version>
+        <spring.version>5.3.9</spring.version>
         <slf4j.version>1.6.6</slf4j.version>
         <mybatis.version>3.4.5</mybatis.version>
         <spring.security.version>5.0.1.RELEASE</spring.security.version>
@@ -172,7 +172,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>2.9.0</version>
+            <version>3.3.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
@@ -320,6 +320,14 @@
             <artifactId>spring-security-core</artifactId>
             <version>5.5.2</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.5.2</version>
+        </dependency>
+
 
 
     </dependencies>

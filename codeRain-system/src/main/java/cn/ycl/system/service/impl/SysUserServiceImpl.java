@@ -1,9 +1,11 @@
 package cn.ycl.system.service.impl;
 
 import cn.ycl.common.core.domain.entity.SysUser;
+import cn.ycl.system.mapper.SysUserMapper;
 import cn.ycl.system.service.ISysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,13 @@ import java.util.List;
 public class SysUserServiceImpl implements ISysUserService {
 
     private static final Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
+
+
+    private SysUserMapper userMapper;
+    @Autowired
+    public void setUserMapper(SysUserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
     public List<SysUser> selectUserList(SysUser user) {
@@ -80,7 +89,7 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Override
     public boolean registerUser(SysUser user) {
-        return false;
+        return userMapper.insertUser(user) > 0;
     }
 
     @Override

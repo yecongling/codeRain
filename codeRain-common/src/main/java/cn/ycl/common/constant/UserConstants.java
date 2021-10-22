@@ -83,6 +83,10 @@ public class UserConstants {
     public final static String CONFIG_KEY_UNIQUE = "0";
     public final static String CONFIG_KEY_NOT_UNIQUE = "1";
 
+    /** 校验返回结果码 */
+    public final static String UNIQUE = "0";
+    public final static String NOT_UNIQUE = "1";
+
     /**
      * 密码长度限制
      */

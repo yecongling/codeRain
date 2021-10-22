@@ -17,7 +17,7 @@
     http://www.springframework.org/schema/cache
     http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-    <context:property-placeholder location="classpath:db.properties,classpath:messages.properties"/>
+    <context:property-placeholder location="classpath:db.properties,classpath:messages.properties" ignore-unresolvable="true"/>
 
     <!-- 开启注解扫描 -->
     <context:component-scan base-package="cn.ycl">
@@ -108,6 +108,8 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
+    <import resource="spring-redis.xml"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
