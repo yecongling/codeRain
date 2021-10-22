@@ -34,7 +34,7 @@ public class CaptchaController {
     private Producer captchaProducerMath;
 
     // 验证码类型
-    @Value("${captchaType}")
+    @Value("${user.captchaType}")
     private String captchaType;
 
     private RedisCache redisCache;
@@ -58,10 +58,10 @@ public class CaptchaController {
     @GetMapping("/captchaImage")
     public AjaxResult getCode(HttpServletResponse response) throws IOException{
         AjaxResult result = AjaxResult.success();
-        boolean captchaOnOff = configService.selectCaptchaOnOff();
-        if (!captchaOnOff) {
-            return result;
-        }
+        //boolean captchaOnOff = configService.selectCaptchaOnOff();
+        //if (!captchaOnOff) {
+        //    return result;
+        //}
 
         // 保存验证码信息
         String uuid = IdUtils.simpleUUID();

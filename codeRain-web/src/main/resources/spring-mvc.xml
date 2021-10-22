@@ -14,7 +14,7 @@
            http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-
+    <context:property-placeholder location="classpath:codeConfig.properties" ignore-unresolvable="true"/>
     <!-- 扫描controller的注解，别的不扫描 -->
     <context:component-scan base-package="cn.ycl.web.controller">
     </context:component-scan>
