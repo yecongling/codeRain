@@ -60,7 +60,7 @@ public class SysLoginService {
     public String login(String username, String password, String code, String uuid) {
 
         // 用户验证
-        Authentication authentication = null;
+        Authentication authentication;
         try {
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));

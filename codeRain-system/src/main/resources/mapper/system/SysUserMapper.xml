@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<sql id="selectUserVo">
-        select  u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.sex, u.password, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.pwd_update_date, u.create_time, u.remark
+		select u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark
 		 from sys_user u
     </sql>
 
@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>-->
 	
 	<select id="selectUserList" parameterType="cn.ycl.common.core.domain.entity.SysUser" resultMap="SysUserResult">
-		select u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
+		select u.user_id, u.dept_id, u.user_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
 		left join sys_dept d on u.dept_id = d.dept_id
 		where u.del_flag = '0'
 		<if test="loginName != null and loginName != ''">
@@ -80,24 +80,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectUnallocatedList" parameterType="cn.ycl.common.core.domain.entity.SysUser" resultMap="SysUserResult">
-	    select distinct u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.status, u.create_time
-	    from sys_user u
-			 left join sys_dept d on u.dept_id = d.dept_id
-			 left join sys_user_role ur on u.user_id = ur.user_id
-			 left join sys_role r on r.role_id = ur.role_id
-	    where u.del_flag = '0' and (r.role_id != #{roleId} or r.role_id IS NULL)
-	    and u.user_id not in (select u.user_id from sys_user u inner join sys_user_role ur on u.user_id = ur.user_id and ur.role_id = #{roleId})
-	    <if test="loginName != null and loginName != ''">
-			AND u.login_name like concat('%', #{loginName}, '%')
-		</if>
-		<if test="phonenumber != null and phonenumber != ''">
-			AND u.phonenumber like concat('%', #{phonenumber}, '%')
-		</if>
 	</select>
 	
-	<select id="selectUserByLoginName" parameterType="String" resultMap="SysUserResult">
+	<select id="selectUserByUserName" parameterType="String" resultMap="SysUserResult">
 	    <include refid="selectUserVo"/>
-		where u.login_name = #{userName}
+		where u.user_name = #{userName}
 	</select>
 	
 	<select id="selectUserByPhoneNumber" parameterType="String" resultMap="SysUserResult">
@@ -111,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="checkUserNameUnique" parameterType="String" resultType="int">
-		select count(1) from sys_user where login_name=#{loginName} limit 1
+		select count(1) from sys_user where user_name=#{loginName} limit 1
 	</select>
 	
 	<select id="checkPhoneUnique" parameterType="String" resultMap="SysUserResult">
@@ -161,43 +148,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</set>
  		where user_id = #{userId}
 	</update>
- 	
- 	<insert id="insertUser" parameterType="cn.ycl.common.core.domain.entity.SysUser" useGeneratedKeys="true" keyProperty="userId">
- 		insert into sys_user(
- 			<if test="userId != null and userId != 0">user_id,</if>
- 			<if test="deptId != null and deptId != 0">dept_id,</if>
- 			<if test="loginName != null and loginName != ''">login_name,</if>
- 			<if test="userName != null and userName != ''">user_name,</if>
- 			<if test="userType != null and userType != ''">user_type,</if>
- 			<if test="email != null and email != ''">email,</if>
- 			<if test="avatar != null and avatar != ''">avatar,</if>
- 			<if test="phonenumber != null and phonenumber != ''">phonenumber,</if>
- 			<if test="sex != null and sex != ''">sex,</if>
- 			<if test="password != null and password != ''">password,</if>
- 			<if test="salt != null and salt != ''">salt,</if>
- 			<if test="status != null and status != ''">status,</if>
- 			<if test="pwdUpdateDate != null">pwd_update_date,</if>
- 			<if test="createBy != null and createBy != ''">create_by,</if>
- 			<if test="remark != null and remark != ''">remark,</if>
- 			create_time
- 		)values(
- 			<if test="userId != null and userId != ''">#{userId},</if>
- 			<if test="deptId != null and deptId != ''">#{deptId},</if>
- 			<if test="loginName != null and loginName != ''">#{loginName},</if>
- 			<if test="userName != null and userName != ''">#{userName},</if>
- 			<if test="userType != null and userType != ''">#{userType},</if>
- 			<if test="email != null and email != ''">#{email},</if>
- 			<if test="avatar != null and avatar != ''">#{avatar},</if>
- 			<if test="phonenumber != null and phonenumber != ''">#{phonenumber},</if>
- 			<if test="sex != null and sex != ''">#{sex},</if>
- 			<if test="password != null and password != ''">#{password},</if>
- 			<if test="salt != null and salt != ''">#{salt},</if>
- 			<if test="status != null and status != ''">#{status},</if>
- 			<if test="pwdUpdateDate != null">#{pwdUpdateDate},</if>
- 			<if test="createBy != null and createBy != ''">#{createBy},</if>
- 			<if test="remark != null and remark != ''">#{remark},</if>
- 			sysdate()
- 		)
+
+	<insert id="insertUser" parameterType="cn.ycl.common.core.domain.entity.SysUser" useGeneratedKeys="true" keyProperty="userId">
+		insert into sys_user(
+		<if test="userId != null and userId != 0">user_id,</if>
+		<if test="deptId != null and deptId != 0">dept_id,</if>
+		<if test="userName != null and userName != ''">user_name,</if>
+		<if test="nickName != null and nickName != ''">nick_name,</if>
+		<if test="email != null and email != ''">email,</if>
+		<if test="avatar != null and avatar != ''">avatar,</if>
+		<if test="phonenumber != null and phonenumber != ''">phonenumber,</if>
+		<if test="sex != null and sex != ''">sex,</if>
+		<if test="password != null and password != ''">password,</if>
+		<if test="status != null and status != ''">status,</if>
+		<if test="createBy != null and createBy != ''">create_by,</if>
+		<if test="remark != null and remark != ''">remark,</if>
+		create_time
+		)values(
+		<if test="userId != null and userId != ''">#{userId},</if>
+		<if test="deptId != null and deptId != ''">#{deptId},</if>
+		<if test="userName != null and userName != ''">#{userName},</if>
+		<if test="nickName != null and nickName != ''">#{nickName},</if>
+		<if test="email != null and email != ''">#{email},</if>
+		<if test="avatar != null and avatar != ''">#{avatar},</if>
+		<if test="phonenumber != null and phonenumber != ''">#{phonenumber},</if>
+		<if test="sex != null and sex != ''">#{sex},</if>
+		<if test="password != null and password != ''">#{password},</if>
+		<if test="status != null and status != ''">#{status},</if>
+		<if test="createBy != null and createBy != ''">#{createBy},</if>
+		<if test="remark != null and remark != ''">#{remark},</if>
+		sysdate()
+		)
 	</insert>
 	
 </mapper> 

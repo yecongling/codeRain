@@ -40,7 +40,7 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Override
     public SysUser selectUserByUserName(String userName) {
-        return null;
+        return userMapper.selectUserByUserName(userName);
     }
 
     @Override

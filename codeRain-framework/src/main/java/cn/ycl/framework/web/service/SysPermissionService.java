@@ -58,7 +58,9 @@ public class SysPermissionService {
         if (user.isAdmin()) {
             perms.add("*:*:*");
         } else {
-            perms.addAll(menuService.selectMenuPermsByUserId(user.getUserId()));
+            perms.add("*:*:*");
+            // 暂时这样处理 避免没有做selectMenuPermsByUserId 返回null引起的空指针问题
+            //perms.addAll(menuService.selectMenuPermsByUserId(user.getUserId()));
         }
         return perms;
     }

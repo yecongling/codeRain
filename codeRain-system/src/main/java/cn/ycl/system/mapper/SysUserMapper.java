@@ -36,7 +36,7 @@ public interface SysUserMapper {
      * @param userName 用户名
      * @return 用户对象信息
      */
-    SysUser selectUserByLoginName(String userName);
+    public SysUser selectUserByUserName(String userName);
 
     /**
      * 通过手机号码查询用户

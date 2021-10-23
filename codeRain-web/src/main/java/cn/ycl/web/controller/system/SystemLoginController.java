@@ -33,10 +33,14 @@ public class SystemLoginController extends BaseController {
     @PostMapping("/login")
     public AjaxResult ajaxLogin(@RequestBody LoginBody user){
         AjaxResult ajax = AjaxResult.success();
+        String token = "";
         // 生成令牌
-        String token = loginService.login(user.getUsername(), user.getPassword(), user.getCode(),
-                user.getUuid());
-        ajax.put(Constants.TOKEN, token);
+        try {
+            token = loginService.login(user.getUsername(), user.getPassword(), user.getCode(),user.getUuid());
+            ajax.put(Constants.TOKEN, token);
+        }catch (Exception e){
+            return AjaxResult.error(e.getMessage());
+        }
         return ajax;
     }
 
