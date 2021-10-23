@@ -12,6 +12,7 @@ import cn.ycl.system.service.ISysUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * 注册校验方法
@@ -32,6 +33,7 @@ public class SysRegisterService {
      * @param user 用户信息
      * @return
      */
+    @PostMapping("/register")
     public String register(RegisterBody user){
         String msg = "", username = user.getUsername(), password = user.getPassword();
 
