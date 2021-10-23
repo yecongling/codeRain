@@ -2,7 +2,6 @@ package cn.ycl.system.mapper;
 
 import cn.ycl.common.core.domain.entity.SysUser;
 
-import java.sql.SQLException;
 import java.util.List;
 
 
@@ -98,10 +97,10 @@ public interface SysUserMapper {
     /**
      * 校验用户名称是否唯一
      *
-     * @param loginName 登录名称
+     * @param userName 用户名称
      * @return 结果
      */
-    int checkLoginNameUnique(String loginName);
+    int checkUserNameUnique(String userName);
 
     /**
      * 校验手机号码是否唯一

@@ -4,7 +4,7 @@ import cn.ycl.common.constant.Constants;
 import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.core.domain.AjaxResult;
 import cn.ycl.common.core.domain.model.LoginBody;
-import cn.ycl.framework.shiro.service.SysLoginService;
+import cn.ycl.framework.web.service.SysLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,5 +1,6 @@
 package cn.ycl.system.service.impl;
 
+import cn.ycl.common.constant.UserConstants;
 import cn.ycl.common.core.domain.entity.SysUser;
 import cn.ycl.system.mapper.SysUserMapper;
 import cn.ycl.system.service.ISysUserService;
@@ -59,7 +60,11 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Override
     public String checkUserNameUnique(String userName) {
-        return null;
+        int count = userMapper.checkUserNameUnique(userName);
+        if (count > 0){
+            return UserConstants.NOT_UNIQUE;
+        }
+        return UserConstants.UNIQUE;
     }
 
     @Override

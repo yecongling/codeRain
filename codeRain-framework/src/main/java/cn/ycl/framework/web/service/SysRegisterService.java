@@ -1,4 +1,4 @@
-package cn.ycl.framework.shiro.service;
+package cn.ycl.framework.web.service;
 
 import cn.ycl.common.constant.Constants;
 import cn.ycl.common.constant.UserConstants;

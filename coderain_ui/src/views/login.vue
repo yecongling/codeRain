@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">codeRain后台管理系统</h3>
       <el-form-item prop="username">
-        <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号">
+        <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号" ref="input">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
@@ -102,8 +102,14 @@ export default {
   created() {
     this.getCode();
     this.getCookie();
+    this.changeFocus();
   },
   methods: {
+    changeFocus() {
+      this.$nextTick(() => {
+        this.$refs.input.focus();
+      });
+    },
     getCode() {
       getCodeImg().then(res => {
         this.captchaOnOff = res.captchaOnOff === undefined ? true : res.captchaOnOff;

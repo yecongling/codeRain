@@ -3,7 +3,7 @@ package cn.ycl.web.controller.system;
 import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.core.domain.AjaxResult;
 import cn.ycl.common.core.domain.model.RegisterBody;
-import cn.ycl.framework.shiro.service.SysRegisterService;
+import cn.ycl.framework.web.service.SysRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;

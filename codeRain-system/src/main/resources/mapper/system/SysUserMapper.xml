@@ -110,7 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where u.email = #{email}
 	</select>
 	
-	<select id="checkLoginNameUnique" parameterType="String" resultType="int">
+	<select id="checkUserNameUnique" parameterType="String" resultType="int">
 		select count(1) from sys_user where login_name=#{loginName} limit 1
 	</select>
 	

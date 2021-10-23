@@ -1,4 +1,4 @@
-package cn.ycl.framework.shiro.service;
+package cn.ycl.framework.web.service;
 
 import cn.ycl.common.constant.Constants;
 import cn.ycl.common.core.domain.model.LoginUser;
@@ -8,7 +8,6 @@ import cn.ycl.common.exception.user.UserPasswordNotMatchException;
 import cn.ycl.common.utils.MessageUtils;
 import cn.ycl.framework.manager.AsyncManager;
 import cn.ycl.framework.manager.factory.AsyncFactory;
-import cn.ycl.framework.web.service.TokenService;
 import cn.ycl.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,7 +27,7 @@ public class SysLoginService {
     private TokenService tokenService;
 
     @Autowired
-    public void setTokenService(TokenService tokenService){
+    public void setTokenService(TokenService tokenService) {
         this.tokenService = tokenService;
     }
 
@@ -40,13 +39,6 @@ public class SysLoginService {
     @Autowired
     public void setRedisCache(RedisCache redisCache) {
         this.redisCache = redisCache;
-    }
-
-    private SysPasswordService passwordService;
-
-    @Autowired
-    public void setPasswordService(SysPasswordService passwordService) {
-        this.passwordService = passwordService;
     }
 
     private ISysUserService userService;
@@ -61,19 +53,19 @@ public class SysLoginService {
      *
      * @param username 用户名
      * @param password 密码
-     * @param code 验证码
-     * @param uuid 唯一ID
+     * @param code     验证码
+     * @param uuid     唯一ID
      * @return 返回用户信息
      */
-    public String login(String username, String password, String code, String uuid){
+    public String login(String username, String password, String code, String uuid) {
 
         // 用户验证
         Authentication authentication = null;
         try {
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (Exception e){
-            if (e instanceof BadCredentialsException){
+        } catch (Exception e) {
+            if (e instanceof BadCredentialsException) {
                 AsyncManager.me().execute(AsyncFactory.recordLoginInfo(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
                 throw new UserPasswordNotMatchException();
             } else {
