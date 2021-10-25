@@ -7,6 +7,7 @@ import cn.ycl.common.core.domain.entity.SysUser;
 import cn.ycl.common.core.domain.model.LoginBody;
 import cn.ycl.common.utils.SecurityUtils;
 import cn.ycl.framework.web.service.SysLoginService;
+import cn.ycl.framework.web.service.SysPermissionService;
 import cn.ycl.system.domain.SysMenu;
 import cn.ycl.system.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 登录验证
@@ -35,6 +37,12 @@ public class SystemLoginController extends BaseController {
     @Autowired
     public void setMenuService(ISysMenuService menuService) {
         this.menuService = menuService;
+    }
+
+    private SysPermissionService permissionService;
+    @Autowired
+    public void setPermissionService(SysPermissionService permissionService) {
+        this.permissionService = permissionService;
     }
 
     /**
@@ -60,11 +68,14 @@ public class SystemLoginController extends BaseController {
      * 获取用户信息
      * @return 返回用户信息
      */
-    @PostMapping("getInfo")
+    @GetMapping("getInfo")
     public AjaxResult getInfo(){
         AjaxResult result = AjaxResult.success();
         SysUser user = SecurityUtils.getLoginUser().getUser();
+        // 菜单权限集合
+        Set<String> permission = permissionService.getMenuPermission(user);
         result.put("user", user);
+        result.put("permissions", permission);
         return result;
     }
 
