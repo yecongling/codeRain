@@ -41,9 +41,29 @@ public class SysMenu extends BaseEntity {
     private String orderNum;
 
     /**
-     * 菜单URL
+     * 路由地址
      */
-    private String url;
+    private String path;
+
+    /**
+     * 组件路径
+     */
+    private String component;
+
+    /**
+     * 路由参数
+     */
+    private String query;
+
+    /**
+     * 是否为外链（0是 1否）
+     */
+    private String isFrame;
+
+    /**
+     * 是否缓存（0缓存 1不缓存）
+     */
+    private String isCache;
 
     /**
      * 类型（M目录 C菜单 F按钮）
@@ -51,9 +71,19 @@ public class SysMenu extends BaseEntity {
     private String menuType;
 
     /**
-     * 菜单状态（0显示 1隐藏）
+     * 显示状态（0显示 1隐藏）
      */
     private String visible;
+
+    /**
+     * 菜单状态（0显示 1隐藏）
+     */
+    private String status;
+
+    /**
+     * 权限字符串
+     */
+    private String perms;
 
     /**
      * 菜单图标
@@ -108,16 +138,47 @@ public class SysMenu extends BaseEntity {
         this.orderNum = orderNum;
     }
 
-    @Size(min = 0, max = 200, message = "请求地址不能超过200个字符")
-    public String getUrl() {
-        return url;
+    @Size(min = 0, max = 200, message = "路由地址不能超过200个字符")
+    public String getPath() {
+        return path;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPath(String path) {
+        this.path = path;
     }
 
+    @Size(min = 0, max = 200, message = "组件路径不能超过255个字符")
+    public String getComponent() {
+        return component;
+    }
 
+    public void setComponent(String component) {
+        this.component = component;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+    public String getIsFrame() {
+        return isFrame;
+    }
+
+    public void setIsFrame(String isFrame) {
+        this.isFrame = isFrame;
+    }
+
+    public String getIsCache() {
+        return isCache;
+    }
+
+    public void setIsCache(String isCache) {
+        this.isCache = isCache;
+    }
 
     @NotBlank(message = "菜单类型不能为空")
     public String getMenuType() {
@@ -136,9 +197,22 @@ public class SysMenu extends BaseEntity {
         this.visible = visible;
     }
 
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
+    @Size(min = 0, max = 100, message = "权限标识长度不能超过100个字符")
+    public String getPerms() {
+        return perms;
+    }
 
+    public void setPerms(String perms) {
+        this.perms = perms;
+    }
 
     public String getIcon() {
         return icon;
@@ -163,9 +237,14 @@ public class SysMenu extends BaseEntity {
                 .append("menuName", getMenuName())
                 .append("parentId", getParentId())
                 .append("orderNum", getOrderNum())
-                .append("url", getUrl())
+                .append("path", getPath())
+                .append("component", getComponent())
+                .append("isFrame", getIsFrame())
+                .append("IsCache", getIsCache())
                 .append("menuType", getMenuType())
                 .append("visible", getVisible())
+                .append("status ", getStatus())
+                .append("perms", getPerms())
                 .append("icon", getIcon())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())

@@ -7,12 +7,15 @@ import cn.ycl.common.core.domain.entity.SysUser;
 import cn.ycl.common.core.domain.model.LoginBody;
 import cn.ycl.common.utils.SecurityUtils;
 import cn.ycl.framework.web.service.SysLoginService;
+import cn.ycl.system.domain.SysMenu;
 import cn.ycl.system.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 登录验证
@@ -72,11 +75,8 @@ public class SystemLoginController extends BaseController {
     @PostMapping("/getRouters")
     public AjaxResult getRouters(){
         Long userId = SecurityUtils.getUserId();
-        return AjaxResult.success();
+        List<SysMenu> sysMenus = menuService.selectMenuTreeByUserId(userId);
+        return AjaxResult.success(menuService.buildMenus(sysMenus));
     }
 
-    @GetMapping("logout")
-    public String loginOut(){
-        return "/login";
-    }
 }

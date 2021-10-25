@@ -1,28 +1,30 @@
 
-/* 系统菜单表 */
-create table if not exists sys_menu
-(
-    menu_id     bigint auto_increment comment '菜单ID' primary key,
-    role_id     bigint(20)               not null comment '菜单所属角色',
-    menu_name   varchar(50)              not null comment '菜单名称',
-    parent_id   bigint       default 0   null comment '父菜单ID',
-    order_num   int(4)       default 0   null comment '显示顺序',
-    url         varchar(200) default '#' null comment '请求地址',
-    menu_type   char         default ''  null comment '菜单类型（M目录 C菜单）',
-    visible     char         default '0' null comment '菜单状态（0显示 1隐藏）',
-    icon        varchar(100) default '#' null comment '菜单图标',
-    create_by   varchar(64)  default ''  null comment '创建者',
-    create_time datetime                 null comment '创建时间',
-    update_by   varchar(64)  default ''  null comment '更新者',
-    update_time datetime                 null comment '更新时间',
-    remark      varchar(500) default ''  null comment '备注'
-)engine=innodb default charset=utf8
-    comment '菜单权限表';
-
-INSERT INTO `sys_menu` VALUES (1, 1, '系统管理', 0, 1, '#', '1', '0', 'fa fa-gear', 'admin', '2021-09-18 11:01:43', 'admin', '2021-09-18 11:01:50', '系统管理目录');
-INSERT INTO `sys_menu` VALUES (2, 1, '系统监控', 0, 2, '#', '1', '0', 'fa fa-video-camera', 'admin', '2021-09-18 11:03:37', 'admin', '2021-09-18 11:03:42', '系统监控目录');
-INSERT INTO `sys_menu` VALUES (100, 1, '菜单管理', 1, 1, 'system/menu/menu.html', '2', '0', 'fa fa-th-list', 'admin', '2021-09-18 11:07:38', 'admin', '2021-09-18 11:07:42', '菜单管理菜单');
-INSERT INTO `sys_menu` VALUES (200, 1, '在线用户', 2, 1, 'monitor/online/online.html', '2', '0', 'fa fa-user-circle', 'admin', '2021-09-22 09:34:00', 'admin', '2021-09-22 09:34:06', '在线用户菜单');
+-- ----------------------------
+-- 菜单权限表
+-- ----------------------------
+drop table if exists sys_menu;
+create table sys_menu (
+  menu_id           bigint(20)      not null auto_increment    comment '菜单ID',
+  menu_name         varchar(50)     not null                   comment '菜单名称',
+  parent_id         bigint(20)      default 0                  comment '父菜单ID',
+  order_num         int(4)          default 0                  comment '显示顺序',
+  path              varchar(200)    default ''                 comment '路由地址',
+  component         varchar(255)    default null               comment '组件路径',
+  query             varchar(255)    default null               comment '路由参数',
+  is_frame          int(1)          default 1                  comment '是否为外链（0是 1否）',
+  is_cache          int(1)          default 0                  comment '是否缓存（0缓存 1不缓存）',
+  menu_type         char(1)         default ''                 comment '菜单类型（M目录 C菜单 F按钮）',
+  visible           char(1)         default 0                  comment '菜单状态（0显示 1隐藏）',
+  status            char(1)         default 0                  comment '菜单状态（0正常 1停用）',
+  perms             varchar(100)    default null               comment '权限标识',
+  icon              varchar(100)    default '#'                comment '菜单图标',
+  create_by         varchar(64)     default ''                 comment '创建者',
+  create_time       datetime                                   comment '创建时间',
+  update_by         varchar(64)     default ''                 comment '更新者',
+  update_time       datetime                                   comment '更新时间',
+  remark            varchar(500)    default ''                 comment '备注',
+  primary key (menu_id)
+) engine=innodb auto_increment=2000 comment = '菜单权限表';
 
 -- ----------------------------
 -- 2、用户信息表
