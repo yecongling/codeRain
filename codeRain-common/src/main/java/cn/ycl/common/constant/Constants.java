@@ -1,5 +1,7 @@
 package cn.ycl.common.constant;
 
+import io.jsonwebtoken.Claims;
+
 /**
  * 通用常量信息
  */
@@ -13,6 +15,16 @@ public class Constants {
      * GBK 字符集
      */
     public static final String GBK = "GBK";
+
+    /**
+     * http请求
+     */
+    public static final String HTTP = "http://";
+
+    /**
+     * https请求
+     */
+    public static final String HTTPS = "https://";
 
     /**
      * 通用成功标识
@@ -45,29 +57,14 @@ public class Constants {
     public static final String LOGIN_FAIL = "Error";
 
     /**
-     * 令牌
+     * 验证码 redis key
      */
-    public static final String TOKEN = "token";
-
-    /**
-     * 令牌前缀
-     */
-    public static final String TOKEN_PREFIX = "Bearer ";
-
-    /**
-     * 令牌前缀
-     */
-    public static final String LOGIN_USER_KEY = "login_user_key";
+    public static final String CAPTCHA_CODE_KEY = "captcha_codes:";
 
     /**
      * 登录用户 redis key
      */
     public static final String LOGIN_TOKEN_KEY = "login_tokens:";
-
-    /**
-     * 验证码 redis key
-     */
-    public static final String CAPTCHA_CODE_KEY = "captcha_codes:";
 
     /**
      * 防重提交 redis key
@@ -85,44 +82,49 @@ public class Constants {
     public static final Integer CAPTCHA_EXPIRATION = 2;
 
     /**
-     * 当前记录起始索引
+     * 令牌
      */
-    public static final String PAGE_NUM = "pageNum";
+    public static final String TOKEN = "token";
 
     /**
-     * 每页显示记录数
+     * 令牌前缀
      */
-    public static final String PAGE_SIZE = "pageSize";
+    public static final String TOKEN_PREFIX = "Bearer ";
 
     /**
-     * 排序列
+     * 令牌前缀
      */
-    public static final String ORDER_BY_COLUMN = "orderByColumn";
+    public static final String LOGIN_USER_KEY = "login_user_key";
 
     /**
-     * 排序的方向 "desc" 或者 "asc".
+     * 用户ID
      */
-    public static final String IS_ASC = "isAsc";
+    public static final String JWT_USERID = "userid";
 
     /**
-     * 系统用户授权缓存
+     * 用户名称
      */
-    public static final String SYS_AUTH_CACHE = "sys-authCache";
+    public static final String JWT_USERNAME = Claims.SUBJECT;
 
     /**
-     * 参数管理 cache name
+     * 用户头像
      */
-    public static final String SYS_CONFIG_CACHE = "sys-config";
+    public static final String JWT_AVATAR = "avatar";
+
+    /**
+     * 创建时间
+     */
+    public static final String JWT_CREATED = "created";
+
+    /**
+     * 用户权限
+     */
+    public static final String JWT_AUTHORITIES = "authorities";
 
     /**
      * 参数管理 cache key
      */
     public static final String SYS_CONFIG_KEY = "sys_config:";
-
-    /**
-     * 字典管理 cache name
-     */
-    public static final String SYS_DICT_CACHE = "sys-dict";
 
     /**
      * 字典管理 cache key
@@ -138,4 +140,9 @@ public class Constants {
      * RMI 远程方法调用
      */
     public static final String LOOKUP_RMI = "rmi://";
+
+    /**
+     * LDAP 远程方法调用
+     */
+    public static final String LOOKUP_LDAP = "ldap://";
 }
