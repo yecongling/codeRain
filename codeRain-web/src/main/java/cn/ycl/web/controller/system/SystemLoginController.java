@@ -83,7 +83,7 @@ public class SystemLoginController extends BaseController {
      * 获取路由配置
      * @return 返回路由配置
      */
-    @PostMapping("/getRouters")
+    @GetMapping("/getRouters")
     public AjaxResult getRouters(){
         Long userId = SecurityUtils.getUserId();
         List<SysMenu> sysMenus = menuService.selectMenuTreeByUserId(userId);

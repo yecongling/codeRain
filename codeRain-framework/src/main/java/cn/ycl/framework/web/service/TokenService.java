@@ -3,7 +3,11 @@ package cn.ycl.framework.web.service;
 import cn.ycl.common.constant.Constants;
 import cn.ycl.common.core.domain.model.LoginUser;
 import cn.ycl.common.core.redis.RedisCache;
+import cn.ycl.common.utils.AddressUtils;
+import cn.ycl.common.utils.IpUtils;
+import cn.ycl.common.utils.ServletUtils;
 import cn.ycl.common.utils.uuid.IdUtils;
+import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -85,6 +89,19 @@ public class TokenService {
     }
 
     /**
+     * 设置用户代理信息
+     * @param loginUser 登录用户
+     */
+    public void setUserAgent(LoginUser loginUser) {
+        UserAgent agent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
+        String IP = IpUtils.getIpAddr(ServletUtils.getRequest());
+        loginUser.setIpaddr(IP);
+        loginUser.setLoginLocation(AddressUtils.getRealAddressByIP(IP));
+        loginUser.setBrowser(agent.getBrowser().getName());
+        loginUser.setOs(agent.getOperatingSystem().getName());
+    }
+
+    /**
      * 创建令牌
      *
      * @param user 用户信息
@@ -93,7 +110,10 @@ public class TokenService {
     public String createToken(LoginUser user) {
         String token = IdUtils.fastUUID();
         user.setToken(token);
+        setUserAgent(user);
 
+        // 刷新token信息
+        refreshToken(user);
         Map<String, Object> claims = new HashMap<String, Object>();
         claims.put(Constants.LOGIN_USER_KEY, token);
         return createToken(claims);
@@ -106,9 +126,7 @@ public class TokenService {
      * @return 令牌
      */
     private String createToken(Map<String, Object> claims) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+        return Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     /**
