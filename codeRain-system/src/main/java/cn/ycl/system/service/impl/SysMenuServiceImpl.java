@@ -2,11 +2,11 @@ package cn.ycl.system.service.impl;
 
 import cn.ycl.common.constant.Constants;
 import cn.ycl.common.constant.UserConstants;
+import cn.ycl.common.core.domain.entity.SysMenu;
 import cn.ycl.common.core.domain.entity.SysUser;
 import cn.ycl.common.core.domain.model.TreeSelect;
 import cn.ycl.common.utils.SecurityUtils;
 import cn.ycl.common.utils.StringUtils;
-import cn.ycl.system.domain.SysMenu;
 import cn.ycl.system.domain.vo.RouterVo;
 import cn.ycl.system.mapper.SysMenuMapper;
 import cn.ycl.system.service.ISysMenuService;
@@ -76,6 +76,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      */
     @Override
     public List<RouterVo> buildMenus(List<SysMenu> menus) {
+
         return null;
     }
 

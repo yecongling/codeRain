@@ -1,6 +1,6 @@
 package cn.ycl.system.mapper;
 
-import cn.ycl.system.domain.SysMenu;
+import cn.ycl.common.core.domain.entity.SysMenu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
