@@ -24,7 +24,7 @@ create table sys_menu (
   update_time       datetime                                   comment '更新时间',
   remark            varchar(500)    default ''                 comment '备注',
   primary key (menu_id)
-) engine=innodb auto_increment=2000 comment = '菜单权限表';
+) engine=innodb auto_increment=2000 charset=utf8 comment = '菜单权限表';
 
 -- ----------------------------
 -- 初始化-菜单信息表数据
@@ -154,7 +154,7 @@ create table sys_user (
       update_time       datetime                                   comment '更新时间',
       remark            varchar(500)    default null               comment '备注',
       primary key (user_id)
-) engine=innodb auto_increment=100 comment = '用户信息表';
+) engine=innodb auto_increment=100 charset=utf8 comment = '用户信息表';
 
 -- ----------------------------
 -- 角色信息表
@@ -176,7 +176,7 @@ create table sys_role (
   update_time          datetime                                   comment '更新时间',
   remark               varchar(500)    default null               comment '备注',
   primary key (role_id)
-) engine=innodb auto_increment=100 comment = '角色信息表';
+) engine=innodb auto_increment=100 charset=utf8 comment = '角色信息表';
 
 -- ----------------------------
 -- 初始化-角色信息表数据
@@ -192,7 +192,7 @@ create table sys_user_role (
                                user_id   bigint(20) not null comment '用户ID',
                                role_id   bigint(20) not null comment '角色ID',
                                primary key(user_id, role_id)
-) engine=innodb comment = '用户和角色关联表';
+) engine=innodb charset=utf8 comment = '用户和角色关联表';
 
 -- ----------------------------
 -- 初始化-用户和角色关联表数据
@@ -209,7 +209,7 @@ create table sys_role_menu (
                                role_id   bigint(20) not null comment '角色ID',
                                menu_id   bigint(20) not null comment '菜单ID',
                                primary key(role_id, menu_id)
-) engine=innodb comment = '角色和菜单关联表';
+) engine=innodb charset=utf8 comment = '角色和菜单关联表';
 
 
 -- ----------------------------

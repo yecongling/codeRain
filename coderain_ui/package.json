@@ -1,8 +1,7 @@
 {
-  "name": "ruoyi",
+  "name": "coderain",
   "version": "3.7.0",
-  "description": "若依管理系统",
-  "author": "若依",
+  "description": "coderain",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
