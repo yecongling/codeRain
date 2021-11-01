@@ -2,6 +2,8 @@ package cn.ycl.system.service.impl;
 
 import cn.ycl.common.core.domain.entity.SysDictData;
 import cn.ycl.common.core.domain.entity.SysDictType;
+import cn.ycl.common.utils.DictUtils;
+import cn.ycl.common.utils.StringUtils;
 import cn.ycl.system.mapper.SysDictDataMapper;
 import cn.ycl.system.mapper.SysDictTypeMapper;
 import cn.ycl.system.service.ISysDictTypeService;
@@ -38,9 +40,22 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
         return null;
     }
 
+    /**
+     * 根据字典类型查询字典数据
+     * @param dictType 字典类型
+     * @return
+     */
     @Override
     public List<SysDictData> selectDictDataByType(String dictType) {
-
+        List<SysDictData> dictData = DictUtils.getDictCache(dictType);
+        if (StringUtils.isNotEmpty(dictData)){
+            return dictData;
+        }
+        dictData = dictDataMapper.selectDictDataByType(dictType);
+        if (StringUtils.isNotEmpty(dictData)){
+            DictUtils.setDictCache(dictType, dictData);
+            return dictData;
+        }
         return null;
     }
 
