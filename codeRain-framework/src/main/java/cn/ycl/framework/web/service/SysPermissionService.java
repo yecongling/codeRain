@@ -41,7 +41,9 @@ public class SysPermissionService {
         if (user.isAdmin()) {
             roles.add("admin");
         } else {
-            roles.addAll(roleService.selectRolePermissionByUserId(user.getUserId()));
+            // 暂时这样处理
+            roles.add("admin");
+            //roles.addAll(roleService.selectRolePermissionByUserId(user.getUserId()));
         }
         return roles;
     }

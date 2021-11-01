@@ -72,8 +72,11 @@ public class SystemLoginController extends BaseController {
     public AjaxResult getInfo(){
         AjaxResult result = AjaxResult.success();
         SysUser user = SecurityUtils.getLoginUser().getUser();
+        // 角色权限集合
+        Set<String> roles = permissionService.getRolePermission(user);
         // 菜单权限集合
         Set<String> permission = permissionService.getMenuPermission(user);
+        result.put("roles", roles);
         result.put("user", user);
         result.put("permissions", permission);
         return result;
