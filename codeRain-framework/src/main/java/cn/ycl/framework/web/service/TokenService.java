@@ -6,12 +6,12 @@ import cn.ycl.common.core.redis.RedisCache;
 import cn.ycl.common.utils.AddressUtils;
 import cn.ycl.common.utils.IpUtils;
 import cn.ycl.common.utils.ServletUtils;
+import cn.ycl.common.utils.StringUtils;
 import cn.ycl.common.utils.uuid.IdUtils;
 import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -73,6 +73,27 @@ public class TokenService {
             }
         }
         return null;
+    }
+
+    /**
+     * 设置用户身份信息
+     * @param loginUser 登录用户信息
+     */
+    public void setLoginUser(LoginUser loginUser){
+        if (StringUtils.isNotNull(loginUser) && StringUtils.isNotEmpty(loginUser.getToken())){
+            refreshToken(loginUser);
+        }
+    }
+
+    /**
+     * 删除用户身份信息
+     * @param token 用户登录token
+     */
+    public void delLoginUser(String token){
+        if (StringUtils.isNotEmpty(token)){
+            String userKey = getTokenKey(token);
+            redisCache.deleteObject(userKey);
+        }
     }
 
     /**
