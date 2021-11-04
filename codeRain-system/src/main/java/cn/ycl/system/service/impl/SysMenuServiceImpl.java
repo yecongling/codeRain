@@ -2,9 +2,9 @@ package cn.ycl.system.service.impl;
 
 import cn.ycl.common.constant.Constants;
 import cn.ycl.common.constant.UserConstants;
+import cn.ycl.common.core.domain.TreeSelect;
 import cn.ycl.common.core.domain.entity.SysMenu;
 import cn.ycl.common.core.domain.entity.SysUser;
-import cn.ycl.common.core.domain.model.TreeSelect;
 import cn.ycl.common.utils.SecurityUtils;
 import cn.ycl.common.utils.StringUtils;
 import cn.ycl.system.domain.vo.MetaVo;
@@ -14,7 +14,10 @@ import cn.ycl.system.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 菜单业务层处理

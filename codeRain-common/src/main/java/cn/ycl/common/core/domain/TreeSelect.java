@@ -1,4 +1,4 @@
-package cn.ycl.common.core.domain.model;
+package cn.ycl.common.core.domain;
 
 import cn.ycl.common.core.domain.entity.SysDept;
 import cn.ycl.common.core.domain.entity.SysMenu;
@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 /**
  * Treeselect树结构实体类
- *
  */
 public class TreeSelect implements Serializable {
     private static final long serialVersionUID = 1L;

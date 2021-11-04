@@ -18,11 +18,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insertLoginInfo" parameterType="cn.ycl.system.domain.SysLoginInfo">
 		insert into sys_logininfo (user_name, status, ipaddr, login_location, browser, os, msg, login_time)
-		values (#{loginName}, #{status}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{msg}, sysdate())
+		values (#{userName}, #{status}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{msg}, sysdate())
 	</insert>
-	
+
 	<select id="selectLoginInfoList" parameterType="cn.ycl.system.domain.SysLoginInfo" resultMap="SysLoginInfoResult">
-		select info_id,user_name,ipaddr,login_location,browser,os,status,msg,login_time from sys_logininfo
+		select info_id, user_name, ipaddr, login_location, browser, os, status, msg, login_time from sys_logininfo
 		<where>
 			<if test="ipaddr != null and ipaddr != ''">
 				AND ipaddr like concat('%', #{ipaddr}, '%')
@@ -30,8 +30,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="status != null and status != ''">
 				AND status = #{status}
 			</if>
-			<if test="loginName != null and loginName != ''">
-				AND login_name like concat('%', #{loginName}, '%')
+			<if test="userName != null and userName != ''">
+				AND user_name like concat('%', #{userName}, '%')
 			</if>
 			<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
 				and date_format(login_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
@@ -40,17 +40,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and date_format(login_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 			</if>
 		</where>
+		order by info_id desc
 	</select>
-	
-	<delete id="deleteLoginInfoByIds" parameterType="String">
- 		delete from sys_logininfo where info_id in
- 		<foreach collection="array" item="infoId" open="(" separator="," close=")">
- 			#{infoId}
-        </foreach> 
- 	</delete>
-    
-    <update id="cleanLoginInfo">
-        truncate table sys_logininfo
-    </update>
+
+	<delete id="deleteLoginInfoByIds" parameterType="Long">
+		delete from sys_logininfo where info_id in
+		<foreach collection="array" item="infoId" open="(" separator="," close=")">
+			#{infoId}
+		</foreach>
+	</delete>
+
+	<update id="cleanLoginInfo">
+		truncate table sys_logininfo
+	</update>
     
 </mapper> 

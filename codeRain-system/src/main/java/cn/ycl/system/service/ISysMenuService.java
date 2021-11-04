@@ -1,7 +1,7 @@
 package cn.ycl.system.service;
 
+import cn.ycl.common.core.domain.TreeSelect;
 import cn.ycl.common.core.domain.entity.SysMenu;
-import cn.ycl.common.core.domain.model.TreeSelect;
 import cn.ycl.system.domain.vo.RouterVo;
 
 import java.util.List;

@@ -67,7 +67,7 @@
             <AppenderRef ref="app" level="info"/>
             <AppenderRef ref="alm" level="error" />
         </Root>
-        <Logger name="org.mybatis" level="error" additivity="false"/>
+        <Logger name="org.mybatis" level="debug" additivity="false"/>
         <Logger name="org.springframework" level="error" additivity="false"/>
         <Logger name="operation" level="error" additivity="false">
             <AppenderRef ref="ope" />
