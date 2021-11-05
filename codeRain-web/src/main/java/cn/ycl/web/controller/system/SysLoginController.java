@@ -25,7 +25,7 @@ import java.util.Set;
  * RestController 注解相当于  ResponseBody+Controller   但该注解不能返回页面
  */
 @RestController
-public class SystemLoginController extends BaseController {
+public class SysLoginController extends BaseController {
 
     private SysLoginService loginService;
     @Autowired
