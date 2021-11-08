@@ -15,11 +15,6 @@ import java.io.IOException;
  */
 public class ServletUtils {
     /**
-     * 定义移动端请求的所有可能类型
-     */
-    private final static String[] agent = {"Android", "iPhone", "iPod", "iPad", "Windows Phone", "MQQBrowser"};
-
-    /**
      * 获取String参数
      */
     public static String getParameter(String name) {
@@ -45,6 +40,20 @@ public class ServletUtils {
      */
     public static Integer getParameterToInt(String name, Integer defaultValue) {
         return Convert.toInt(getRequest().getParameter(name), defaultValue);
+    }
+
+    /**
+     * 获取Boolean参数
+     */
+    public static Boolean getParameterToBool(String name) {
+        return Convert.toBool(getRequest().getParameter(name));
+    }
+
+    /**
+     * 获取Boolean参数
+     */
+    public static Boolean getParameterToBool(String name, Boolean defaultValue) {
+        return Convert.toBool(getRequest().getParameter(name), defaultValue);
     }
 
     /**
@@ -82,6 +91,7 @@ public class ServletUtils {
      */
     public static String renderString(HttpServletResponse response, String string) {
         try {
+            response.setStatus(200);
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
             response.getWriter().print(string);
@@ -113,25 +123,9 @@ public class ServletUtils {
         }
 
         String ajax = request.getParameter("__ajax");
-        return StringUtils.inStringIgnoreCase(ajax, "json", "xml");
-    }
-
-    /**
-     * 判断User-Agent 是不是来自于手机
-     */
-    public static boolean checkAgentIsMobile(String ua) {
-        boolean flag = false;
-        if (!ua.contains("Windows NT") || (ua.contains("Windows NT") && ua.contains("compatible; MSIE 9.0;"))) {
-            // 排除 苹果桌面系统
-            if (!ua.contains("Windows NT") && !ua.contains("Macintosh")) {
-                for (String item : agent) {
-                    if (ua.contains(item)) {
-                        flag = true;
-                        break;
-                    }
-                }
-            }
+        if (StringUtils.inStringIgnoreCase(ajax, "json", "xml")) {
+            return true;
         }
-        return flag;
+        return false;
     }
 }

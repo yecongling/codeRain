@@ -2,7 +2,9 @@ package cn.ycl.system.service.impl;
 
 import cn.ycl.common.core.domain.entity.SysRole;
 import cn.ycl.system.domain.SysUserRole;
+import cn.ycl.system.mapper.SysRoleMapper;
 import cn.ycl.system.service.ISysRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +15,16 @@ import java.util.Set;
  */
 @Service
 public class SysRoleServiceImpl implements ISysRoleService {
+
+    private SysRoleMapper roleMapper;
+    @Autowired
+    public void setRoleMapper(SysRoleMapper roleMapper) {
+        this.roleMapper = roleMapper;
+    }
+
     @Override
     public List<SysRole> selectRoleList(SysRole role) {
-        return null;
+        return roleMapper.selectRoleList(role);
     }
 
     @Override

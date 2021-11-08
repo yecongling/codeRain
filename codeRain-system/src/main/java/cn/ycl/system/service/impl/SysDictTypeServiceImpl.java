@@ -30,9 +30,15 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
         this.dictDataMapper = dictDataMapper;
     }
 
+    /**
+     * 根据条件分页查询字典类型
+     *
+     * @param dictType 字典类型信息
+     * @return 字典类型集合信息
+     */
     @Override
     public List<SysDictType> selectDictTypeList(SysDictType dictType) {
-        return null;
+        return dictTypeMapper.selectDictTypeList(dictType);
     }
 
     @Override

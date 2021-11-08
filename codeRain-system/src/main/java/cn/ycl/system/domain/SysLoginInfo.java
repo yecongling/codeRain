@@ -9,7 +9,6 @@ import java.util.Date;
 /**
  * 系统访问记录表 sys_logininfo
  * 
- * @author ruoyi
  */
 public class SysLoginInfo extends BaseEntity {
     private static final long serialVersionUID = 1L;

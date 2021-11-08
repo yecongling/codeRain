@@ -25,7 +25,7 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Override
     public List<SysUser> selectUserList(SysUser user) {
-        return null;
+        return userMapper.selectUserList(user);
     }
 
     @Override

@@ -34,4 +34,15 @@ public class SysDeptController extends BaseController {
         List<SysDept> depts = deptService.selectDeptList(dept);
         return AjaxResult.success(depts);
     }
+
+    /**
+     * 获取部门下拉树列表
+     * @param dept 部门信息
+     * @return 部门下拉树列表
+     */
+    @GetMapping("/treeSelect")
+    public AjaxResult treeSelect(SysDept dept){
+        List<SysDept> depts = deptService.selectDeptList(dept);
+        return AjaxResult.success(deptService.buildDeptTreeSelect(depts));
+    }
 }
