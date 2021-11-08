@@ -56,6 +56,11 @@ public class SysMenuServiceImpl implements ISysMenuService {
         return null;
     }
 
+    /**
+     * 获取路由信息
+     * @param userId 用户ID
+     * @return
+     */
     @Override
     public List<SysMenu> selectMenuTreeByUserId(Long userId) {
         List<SysMenu> menus;
@@ -141,7 +146,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
     @Override
     public SysMenu selectMenuById(Long menuId) {
-        return null;
+        return sysMenuMapper.selectMenuById(menuId);
     }
 
     @Override
