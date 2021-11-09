@@ -14,10 +14,8 @@ import cn.ycl.system.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 菜单业务层处理
@@ -33,9 +31,15 @@ public class SysMenuServiceImpl implements ISysMenuService {
         this.sysMenuMapper = sysMenuMapper;
     }
 
+    /**
+     * 根据用户查询系统菜单列表
+     *
+     * @param userId 用户ID
+     * @return 菜单列表
+     */
     @Override
     public List<SysMenu> selectMenuList(Long userId) {
-        return null;
+        return selectMenuList(new SysMenu(), userId);
     }
 
     @Override
@@ -58,6 +62,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
     /**
      * 获取路由信息
+     *
      * @param userId 用户ID
      * @return
      */
@@ -95,11 +100,11 @@ public class SysMenuServiceImpl implements ISysMenuService {
             router.setQuery(menu.getQuery());
             router.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getPath()));
             List<SysMenu> cMenus = menu.getChildren();
-            if (!cMenus.isEmpty() && UserConstants.TYPE_DIR.equals(menu.getMenuType())){
+            if (!cMenus.isEmpty() && UserConstants.TYPE_DIR.equals(menu.getMenuType())) {
                 router.setAlwaysShow(true);
                 router.setRedirect("noRedirect");
                 router.setChildren(buildMenus(cMenus));
-            } else if (isMenuFrame(menu)){
+            } else if (isMenuFrame(menu)) {
                 router.setMeta(null);
                 List<RouterVo> childrenList = new ArrayList<RouterVo>();
                 RouterVo children = new RouterVo();
@@ -110,12 +115,12 @@ public class SysMenuServiceImpl implements ISysMenuService {
                 children.setQuery(menu.getQuery());
                 childrenList.add(children);
                 router.setChildren(childrenList);
-            }  else if (menu.getParentId().intValue() == 0 && isInnerLink(menu)){
+            } else if (menu.getParentId().intValue() == 0 && isInnerLink(menu)) {
                 router.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon()));
                 router.setPath("/inner");
                 List<RouterVo> childrenList = new ArrayList<RouterVo>();
                 RouterVo children = new RouterVo();
-                String routerPath = StringUtils.replaceEach(menu.getPath(), new String[] { Constants.HTTP, Constants.HTTPS }, new String[] { "", "" });
+                String routerPath = StringUtils.replaceEach(menu.getPath(), new String[]{Constants.HTTP, Constants.HTTPS}, new String[]{"", ""});
                 children.setPath(routerPath);
                 children.setComponent(UserConstants.INNER_LINK);
                 children.setName(StringUtils.capitalize(routerPath));
@@ -128,14 +133,42 @@ public class SysMenuServiceImpl implements ISysMenuService {
         return routers;
     }
 
+    /**
+     * 构建前端所需要树结构
+     *
+     * @param menus 菜单列表
+     * @return 树结构列表
+     */
     @Override
     public List<SysMenu> buildMenuTree(List<SysMenu> menus) {
-        return null;
+        List<SysMenu> returnList = new ArrayList<>();
+        List<Long> tempList = new ArrayList<>();
+        for (SysMenu dept : menus) {
+            tempList.add(dept.getMenuId());
+        }
+        for (SysMenu menu : menus) {
+            // 如果是顶级节点, 遍历该父节点的所有子节点
+            if (!tempList.contains(menu.getParentId())) {
+                recursionFn(menus, menu);
+                returnList.add(menu);
+            }
+        }
+        if (returnList.isEmpty()) {
+            returnList = menus;
+        }
+        return returnList;
     }
 
+    /**
+     * 构建前端所需要下拉树结构
+     *
+     * @param menus 菜单列表
+     * @return 下拉树结构列表
+     */
     @Override
     public List<TreeSelect> buildMenuTreeSelect(List<SysMenu> menus) {
-        return null;
+        List<SysMenu> tree = buildMenuTree(menus);
+        return tree.stream().map(TreeSelect::new).collect(Collectors.toList());
     }
 
 

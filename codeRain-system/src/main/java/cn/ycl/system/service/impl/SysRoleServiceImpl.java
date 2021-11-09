@@ -1,6 +1,11 @@
 package cn.ycl.system.service.impl;
 
 import cn.ycl.common.core.domain.entity.SysRole;
+import cn.ycl.common.core.domain.entity.SysUser;
+import cn.ycl.common.exception.ServiceException;
+import cn.ycl.common.utils.SecurityUtils;
+import cn.ycl.common.utils.StringUtils;
+import cn.ycl.common.utils.spring.SpringUtils;
 import cn.ycl.system.domain.SysUserRole;
 import cn.ycl.system.mapper.SysRoleMapper;
 import cn.ycl.system.service.ISysRoleService;
@@ -47,9 +52,15 @@ public class SysRoleServiceImpl implements ISysRoleService {
         return null;
     }
 
+    /**
+     * 通过角色ID查询角色
+     *
+     * @param roleId 角色ID
+     * @return 角色对象信息
+     */
     @Override
     public SysRole selectRoleById(Long roleId) {
-        return null;
+        return roleMapper.selectRoleById(roleId);
     }
 
     @Override
@@ -67,9 +78,21 @@ public class SysRoleServiceImpl implements ISysRoleService {
 
     }
 
+    /**
+     * 校验角色是否有数据权限
+     *
+     * @param roleId 角色id
+     */
     @Override
     public void checkRoleDataScope(Long roleId) {
-
+        if (!SysUser.isAdmin(SecurityUtils.getUserId())){
+            SysRole role = new SysRole();
+            role.setRoleId(roleId);
+            List<SysRole> roles = SpringUtils.getAopProxy(this).selectRoleList(role);
+            if (StringUtils.isEmpty(roles)){
+                throw new ServiceException("没有权限访问角色数据！");
+            }
+        }
     }
 
     @Override

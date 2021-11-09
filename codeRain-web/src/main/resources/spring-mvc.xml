@@ -27,23 +27,8 @@
         <property name="suffix" value=".html" />
     </bean>
 
-    <!-- 设置静态资源不过滤 -->
-    <mvc:resources location="/css/" mapping="/css/**" />
-    <mvc:resources location="/images/" mapping="/images/**" />
-    <mvc:resources location="/js/" mapping="/js/**" />
-    <mvc:resources location="/plugins/" mapping="/plugins/**" />
-    <mvc:resources location="/pages/" mapping="/pages/**" />
-
     <!-- 开启对SpringMVC注解的支持 -->
     <mvc:annotation-driven />
-
-    <!--
-        支持AOP的注解支持，AOP底层使用代理技术
-        JDK动态代理，要求必须有接口
-        cglib代理，生成子类对象，proxy-target-class="true" 默认使用cglib的方式
-    -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
-
     <!--<mvc:cors>
         <mvc:mapping path="/**"
                      allowed-origins="*"

@@ -41,6 +41,31 @@ public class SysMenuController extends BaseController {
     }
 
     /**
+     * 获取菜单下拉列表树
+     * @param menu 菜单
+     * @return 列表树
+     */
+    @GetMapping("/treeSelect")
+    public AjaxResult treeSelect(SysMenu menu){
+        List<SysMenu> menus = menuService.selectMenuList(menu, getUserId());
+        return AjaxResult.success(menuService.buildMenuTreeSelect(menus));
+    }
+
+    /**
+     * 加载对应菜单的列表树
+     * @param roleId 角色ID
+     * @return 菜单树
+     */
+    @GetMapping(value = "/roleMenuTreeSelect/{roleId}")
+    public AjaxResult roleMenuTreeSelect(@PathVariable("roleId") Long roleId){
+        List<SysMenu> menus = menuService.selectMenuList(getUserId());
+        AjaxResult ajax = AjaxResult.success();
+        ajax.put("checkedKeys", menuService.selectMenuListByRoleId(roleId));
+        ajax.put("menus", menuService.buildMenuTreeSelect(menus));
+        return ajax;
+    }
+
+    /**
      * 修改菜单
      * @param menu 菜单信息
      * @return 返回修改成功失败
