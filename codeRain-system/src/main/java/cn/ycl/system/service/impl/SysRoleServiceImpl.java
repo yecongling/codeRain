@@ -88,7 +88,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
         if (!SysUser.isAdmin(SecurityUtils.getUserId())){
             SysRole role = new SysRole();
             role.setRoleId(roleId);
-            List<SysRole> roles = SpringUtils.getAopProxy(this).selectRoleList(role);
+            List<SysRole> roles = SpringUtils.getBean(ISysRoleService.class).selectRoleList(role);
             if (StringUtils.isEmpty(roles)){
                 throw new ServiceException("没有权限访问角色数据！");
             }
