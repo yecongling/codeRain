@@ -6,6 +6,7 @@ import cn.ycl.common.core.domain.entity.SysDept;
 import cn.ycl.system.service.ISysDeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,5 +45,19 @@ public class SysDeptController extends BaseController {
     public AjaxResult treeSelect(SysDept dept){
         List<SysDept> depts = deptService.selectDeptList(dept);
         return AjaxResult.success(deptService.buildDeptTreeSelect(depts));
+    }
+
+    /**
+     * 加载对应角色的部门列表树
+     * @param roleId 角色ID
+     * @return 返回角色对应的部门列表树
+     */
+    @GetMapping(value = "/roleDeptTreeSelect/{roleId}")
+    public AjaxResult roleDeptTreeSelect(@PathVariable("roleId") Long roleId) {
+        List<SysDept> depts = deptService.selectDeptList(new SysDept());
+        AjaxResult ajax = AjaxResult.success();
+        ajax.put("checkedKeys", deptService.selectDeptListByRoleId(roleId));
+        ajax.put("depts", deptService.buildDeptTreeSelect(depts));
+        return ajax;
     }
 }

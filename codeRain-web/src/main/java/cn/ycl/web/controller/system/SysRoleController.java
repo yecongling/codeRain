@@ -1,16 +1,20 @@
 package cn.ycl.web.controller.system;
 
+import cn.ycl.common.constant.UserConstants;
 import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.core.domain.AjaxResult;
 import cn.ycl.common.core.domain.entity.SysRole;
+import cn.ycl.common.core.domain.entity.SysUser;
+import cn.ycl.common.core.domain.model.LoginUser;
 import cn.ycl.common.core.page.TableDataInfo;
+import cn.ycl.common.utils.StringUtils;
+import cn.ycl.framework.web.service.SysPermissionService;
 import cn.ycl.framework.web.service.TokenService;
 import cn.ycl.system.service.ISysRoleService;
+import cn.ycl.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +32,18 @@ public class SysRoleController extends BaseController {
     @Autowired
     public void setRoleService(ISysRoleService roleService) {
         this.roleService = roleService;
+    }
+
+    private SysPermissionService permissionService;
+    @Autowired
+    public void setPermissionService(SysPermissionService permissionService) {
+        this.permissionService = permissionService;
+    }
+
+    private ISysUserService userService;
+    @Autowired
+    public void setUserService(ISysUserService userService) {
+        this.userService = userService;
     }
 
     /**
@@ -52,4 +68,38 @@ public class SysRoleController extends BaseController {
         roleService.checkRoleDataScope(roleId);
         return AjaxResult.success(roleService.selectRoleById(roleId));
     }
+
+    /**
+     * 修改保存角色
+     * @param role 角色信息
+     * @return 返回保存成功或失败
+     */
+    @PutMapping
+    public AjaxResult edit(@Validated @RequestBody SysRole role){
+        roleService.checkRoleAllowed(role);
+        if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleNameUnique(role))){
+            return AjaxResult.error("修改角色'" + role.getRoleName() + "'失败，角色名称已存在");
+        } else if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleKeyUnique(role))){
+            return AjaxResult.error("修改角色'" + role.getRoleName() + "'失败, 角色权限已存在");
+        }
+
+        role.setUpdateBy(getUsername());
+        if (roleService.updateRole(role) > 0){
+            // 更新缓存用户权限
+            LoginUser loginUser = getLoginUser();
+            if (StringUtils.isNotNull(loginUser.getUser()) && !loginUser.getUser().isAdmin()){
+                loginUser.setPermissions(permissionService.getMenuPermission(loginUser.getUser()));
+                loginUser.setUser(userService.selectUserByUserName(loginUser.getUser().getUserName()));
+                tokenService.setLoginUser(loginUser);
+            }
+            return AjaxResult.success();
+        }
+        return AjaxResult.error("修改角色'" + role.getRoleName() + "’失败，请联系管理员");
+    }
+
+    public TableDataInfo allocatedList(SysUser user) {
+        return null;
+    }
+
+
 }

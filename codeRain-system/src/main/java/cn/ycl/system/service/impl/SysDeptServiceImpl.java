@@ -2,8 +2,10 @@ package cn.ycl.system.service.impl;
 
 import cn.ycl.common.core.domain.TreeSelect;
 import cn.ycl.common.core.domain.entity.SysDept;
+import cn.ycl.common.core.domain.entity.SysRole;
 import cn.ycl.common.utils.StringUtils;
 import cn.ycl.system.mapper.SysDeptMapper;
+import cn.ycl.system.mapper.SysRoleMapper;
 import cn.ycl.system.service.ISysDeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,13 @@ public class SysDeptServiceImpl implements ISysDeptService {
     @Autowired
     public void setDeptMapper(SysDeptMapper deptMapper) {
         this.deptMapper = deptMapper;
+    }
+
+
+    private SysRoleMapper roleMapper;
+    @Autowired
+    public void setRoleMapper(SysRoleMapper roleMapper) {
+        this.roleMapper = roleMapper;
     }
 
     /**
@@ -74,9 +83,16 @@ public class SysDeptServiceImpl implements ISysDeptService {
         return sysDepts.stream().map(TreeSelect::new).collect(Collectors.toList());
     }
 
+    /**
+     * 根据角色ID查询部门树信息
+     *
+     * @param roleId 角色ID
+     * @return 选中部门列表
+     */
     @Override
     public List<Integer> selectDeptListByRoleId(Long roleId) {
-        return null;
+        SysRole role = roleMapper.selectRoleById(roleId);
+        return deptMapper.selectDeptListByRoleId(roleId, role.isDeptCheckStrictly());
     }
 
     @Override

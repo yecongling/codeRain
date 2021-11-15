@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 /**
  * 获取地址类
  *
- * @author ruoyi
  */
 public class AddressUtils {
     private static final Logger log = LoggerFactory.getLogger(cn.ycl.common.utils.AddressUtils.class);

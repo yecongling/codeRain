@@ -262,7 +262,7 @@
 <script>
 import { listRole, getRole, delRole, addRole, updateRole, exportRole, dataScope, changeRoleStatus } from "@/api/system/role";
 import { treeSelect as menuTreeSelect, roleMenuTreeSelect } from "@/api/system/menu";
-import { treeselect as deptTreeselect, roleDeptTreeselect } from "@/api/system/dept";
+import { treeSelect as deptTreeSelect, roleDeptTreeSelect } from "@/api/system/dept";
 
 export default {
   name: "Role",
@@ -375,7 +375,7 @@ export default {
     },
     /** 查询部门树结构 */
     getDeptTreeSelect() {
-      deptTreeselect().then(response => {
+      deptTreeSelect().then(response => {
         this.deptOptions = response.data;
       });
     },
@@ -405,8 +405,8 @@ export default {
       });
     },
     /** 根据角色ID查询部门树结构 */
-    getRoleDeptTreeselect(roleId) {
-      return roleDeptTreeselect(roleId).then(response => {
+    getRoleDeptTreeSelect(roleId) {
+      return roleDeptTreeSelect(roleId).then(response => {
         this.deptOptions = response.depts;
         return response;
       });
@@ -552,12 +552,12 @@ export default {
     /** 分配数据权限操作 */
     handleDataScope(row) {
       this.reset();
-      const roleDeptTreeselect = this.getRoleDeptTreeselect(row.roleId);
+      const roleDeptTreeSelect = this.getRoleDeptTreeSelect(row.roleId);
       getRole(row.roleId).then(response => {
         this.form = response.data;
         this.openDataScope = true;
         this.$nextTick(() => {
-          roleDeptTreeselect.then(res => {
+          roleDeptTreeSelect.then(res => {
             this.$refs.dept.setCheckedKeys(res.checkedKeys);
           });
         });
@@ -573,7 +573,7 @@ export default {
     submitForm: function() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.roleId != undefined) {
+          if (this.form.roleId !== undefined) {
             this.form.menuIds = this.getMenuAllCheckedKeys();
             updateRole(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
