@@ -246,7 +246,7 @@
             ref="dept"
             node-key="id"
             :check-strictly="!form.deptCheckStrictly"
-            empty-text="加载中，请稍后"
+            empty-text="无对应数据"
             :props="defaultProps"
           ></el-tree>
         </el-form-item>
