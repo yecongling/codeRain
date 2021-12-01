@@ -192,10 +192,15 @@ public class SysMenuServiceImpl implements ISysMenuService {
         return false;
     }
 
-
+    /**
+     * 新增保存菜单信息
+     *
+     * @param menu 菜单信息
+     * @return 结果
+     */
     @Override
     public int insertMenu(SysMenu menu) {
-        return 0;
+        return sysMenuMapper.insertMenu(menu);
     }
 
     @Override

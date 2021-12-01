@@ -1,6 +1,6 @@
 package cn.ycl.web.controller.system;
 
-import cn.ycl.common.constant.UserConstants;
+ import cn.ycl.common.constant.UserConstants;
 import cn.ycl.common.core.controller.BaseController;
 import cn.ycl.common.core.domain.AjaxResult;
 import cn.ycl.common.core.domain.entity.SysMenu;
@@ -64,6 +64,23 @@ public class SysMenuController extends BaseController {
         ajax.put("menus", menuService.buildMenuTreeSelect(menus));
         return ajax;
     }
+
+    /**
+     * 新增菜单
+     * @param menu 菜单信息
+     * @return 返回新增成功或失败的信息
+     */
+    @PostMapping
+    public AjaxResult add(@Validated @RequestBody SysMenu menu){
+        if (UserConstants.NOT_UNIQUE.equals(menuService.checkMenuNameUnique(menu))) {
+            return AjaxResult.error("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
+        } else if (UserConstants.YES_FRAME.equals(menu.getIsFrame()) && !StringUtils.ishttp(menu.getPath())) {
+            return AjaxResult.error("新增菜单'" + menu.getMenuName() + "'失败，地址必须以http(s)://开头");
+        }
+        menu.setCreateBy(getUsername());
+        return toAjax(menuService.insertMenu(menu));
+    }
+
 
     /**
      * 修改菜单
