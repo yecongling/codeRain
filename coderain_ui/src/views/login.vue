@@ -1,9 +1,14 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">codeRain后台管理系统</h3>
+      <h3 class="title">若依后台管理系统</h3>
       <el-form-item prop="username">
-        <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号" ref="input">
+        <el-input
+          v-model="loginForm.username"
+          type="text"
+          auto-complete="off"
+          placeholder="账号"
+        >
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
@@ -66,10 +71,9 @@ export default {
   data() {
     return {
       codeUrl: "",
-      cookiePassword: "",
       loginForm: {
-        username: "ycl",
-        password: "123123",
+        username: "admin",
+        password: "admin123",
         rememberMe: false,
         code: "",
         uuid: ""
@@ -87,7 +91,7 @@ export default {
       // 验证码开关
       captchaOnOff: true,
       // 注册开关
-      register: true,
+      register: false,
       redirect: undefined
     };
   },
@@ -102,14 +106,8 @@ export default {
   created() {
     this.getCode();
     this.getCookie();
-    this.changeFocus();
   },
   methods: {
-    changeFocus() {
-      this.$nextTick(() => {
-        this.$refs.input.focus();
-      });
-    },
     getCode() {
       getCodeImg().then(res => {
         this.captchaOnOff = res.captchaOnOff === undefined ? true : res.captchaOnOff;

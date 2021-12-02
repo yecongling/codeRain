@@ -1,9 +1,9 @@
 <template>
   <div class="register">
     <el-form ref="registerForm" :model="registerForm" :rules="registerRules" class="register-form">
-      <h3 class="title">codeRain后台管理系统</h3>
+      <h3 class="title">若依后台管理系统</h3>
       <el-form-item prop="username">
-        <el-input v-model="registerForm.username" type="text" auto-complete="off" placeholder="账号" ref="input">
+        <el-input v-model="registerForm.username" type="text" auto-complete="off" placeholder="账号">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
@@ -109,15 +109,9 @@ export default {
   },
   created() {
     this.getCode();
-    this.changFocus();
   },
   methods: {
-      changFocus() {
-        this.$nextTick((x) => {
-          this.$refs.input.focus();
-        })
-      },
-      getCode() {
+    getCode() {
       getCodeImg().then(res => {
         this.captchaOnOff = res.captchaOnOff === undefined ? true : res.captchaOnOff;
         if (this.captchaOnOff) {
@@ -133,7 +127,8 @@ export default {
           register(this.registerForm).then(res => {
             const username = this.registerForm.username;
             this.$alert("<font color='red'>恭喜你，您的账号 " + username + " 注册成功！</font>", '系统提示', {
-              dangerouslyUseHTMLString: true
+              dangerouslyUseHTMLString: true,
+              type: 'success'
             }).then(() => {
               this.$router.push("/login");
             }).catch(() => {});

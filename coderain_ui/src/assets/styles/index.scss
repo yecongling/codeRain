@@ -11,7 +11,6 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
-  background: #f0f2f5;
 }
 
 label {
@@ -123,6 +122,9 @@ aside {
 //main-container全局样式
 .app-container {
   padding: 10px;
+  border-radius: 6px;
+  background: #ffffff;
+  height: 100%;
 }
 
 .components-container {
