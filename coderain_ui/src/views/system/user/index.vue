@@ -207,10 +207,7 @@
     </el-row>
 
     <!-- 添加或修改用户配置对话框 -->
-    <a-modal title="Title" :visible="open" >
-      这是弹框
-    </a-modal>
-    <!--<el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
@@ -313,7 +310,7 @@
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
-    </el-dialog>-->
+    </el-dialog>
 
     <!-- 用户导入对话框 -->
     <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
@@ -566,16 +563,15 @@ export default {
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.open = true;
-      // this.reset();
-      // this.getTreeSelect();
-      // getUser().then(response => {
-      //   this.postOptions = response.posts;
-      //   this.roleOptions = response.roles;
-      //   this.open = true;
-      //   this.title = "添加用户";
-      //   this.form.password = this.initPassword;
-      // });
+      this.reset();
+      this.getTreeSelect();
+      getUser().then(response => {
+        this.postOptions = response.posts;
+        this.roleOptions = response.roles;
+        this.open = true;
+        this.title = "添加用户";
+        this.form.password = this.initPassword;
+      });
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
