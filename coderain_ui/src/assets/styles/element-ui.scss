@@ -10,7 +10,9 @@
     display: none !important;
   }
 }
-
+.el-dialog {
+  border-radius: 4px;
+}
 .el-upload__input {
   display: none;
 }
