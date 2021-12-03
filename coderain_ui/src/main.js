@@ -5,6 +5,9 @@ import Cookies from 'js-cookie'
 import Element from 'element-ui'
 import './assets/styles/element-variables.scss'
 
+// 引入ant-design组件
+import Ant from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
 import '@/assets/styles/index.scss' // global css
 import '@/assets/styles/ruoyi.scss' // ruoyi css
 import App from './App'
@@ -55,6 +58,7 @@ Vue.component('Editor', Editor)
 Vue.component('FileUpload', FileUpload)
 Vue.component('ImageUpload', ImageUpload)
 
+Vue.use(Ant)
 Vue.use(directive)
 Vue.use(plugins)
 Vue.use(VueMeta)
